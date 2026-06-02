@@ -167,7 +167,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-regents-flat-n-146f40",
-    title: "Regents Flat N · 1-bed",
+    title: "Regent's Flat N · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -188,7 +188,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-euston-1-83a49f",
-    title: "Euston · Flat 1 · 1-bed",
+    title: "Euston Flat 1 · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -230,7 +230,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-regents-flat-m-8f6807",
-    title: "Regents Flat M · 1-bed",
+    title: "Regent's Flat M · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -436,7 +436,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "old-street-shoreditch-hackney-1b-bfb561",
-    title: "Hackney 1B · 1-bed",
+    title: "Hackney Flat 1B · 1-bed",
     area: "old-street-shoreditch",
     areaLabel: "Old Street & Shoreditch",
     bedrooms: 1,
@@ -478,7 +478,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-regents-flat-d-a385dd",
-    title: "Regents Flat D · 1-bed",
+    title: "Regent's Flat D · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -581,7 +581,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-regents-flat-e-f9b933",
-    title: "Regents Flat E · 1-bed",
+    title: "Regent's Flat E · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -685,7 +685,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "old-street-shoreditch-63-kings-cross-41cee1",
-    title: "63 King's Cross · 3-bed",
+    title: "King's Cross Flat 63 · 3-bed",
     area: "old-street-shoreditch",
     areaLabel: "Old Street & Shoreditch",
     bedrooms: 3,
@@ -705,7 +705,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-regents-flat-3-cf71bf",
-    title: "Regents Flat 3 · 3-bed",
+    title: "Regent's Flat 3 · 3-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 3,
@@ -726,7 +726,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-regents-flat-l-99fa98",
-    title: "Regents Flat L · 1-bed",
+    title: "Regent's Flat L · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -810,7 +810,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-euston-2-56b9e5",
-    title: "Euston · Flat 2 · 1-bed",
+    title: "Euston Flat 2 · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -851,7 +851,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-regents-flat-w-18e0d6",
-    title: "Regents Flat W · 1-bed",
+    title: "Regent's Flat W · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -872,7 +872,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "regents-park-marylebone-regents-flat-f-e493bc",
-    title: "Regents Flat F · 1-bed",
+    title: "Regent's Flat F · 1-bed",
     area: "regents-park-marylebone",
     areaLabel: "Regent's Park & Marylebone",
     bedrooms: 1,
@@ -892,7 +892,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     slug: "old-street-shoreditch-shoreditch-flat-5-a820ac",
-    title: "Shoreditch flat 5 · 4-bed",
+    title: "Shoreditch Flat 5 · 4-bed",
     area: "old-street-shoreditch",
     areaLabel: "Old Street & Shoreditch",
     bedrooms: 4,
