@@ -26,14 +26,18 @@ const ORG_BASE = {
     postalCode: "W14 8PS",
     addressCountry: "GB",
   },
+  sameAs: [
+    "https://www.instagram.com/nournest_apartments/",
+    "https://find-and-update.company-information.service.gov.uk/company/16629708",
+  ],
+  founder: {
+    "@type": "Person",
+    name: "Gerda Micke",
+    jobTitle: "Director",
+  },
   areaServed: [
-    { "@type": "Place", name: "Regent's Park & Marylebone, London" },
     { "@type": "Place", name: "Old Street & Shoreditch, London" },
-    { "@type": "Place", name: "Kensington & Hammersmith, London" },
-    { "@type": "Place", name: "Fitzrovia & Mayfair, London" },
-    { "@type": "Place", name: "Barbican & Farringdon, London" },
     { "@type": "Place", name: "Borough & Pimlico, London" },
-    { "@type": "Place", name: "Little Venice & Maida Vale, London" },
   ],
   amenityFeature: [
     "Fully fitted kitchen",

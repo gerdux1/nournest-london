@@ -1,20 +1,15 @@
 # NourNest
 
-> NourNest is the trading name of NourNest Ltd (), an independent London serviced apartment operator. NourNest operates ~40+ fully equipped serviced apartments across seven Central London neighbourhoods: Regent's Park & Marylebone (largest concentration), Old Street & Shoreditch, Kensington & Hammersmith, Fitzrovia & Mayfair, Barbican & Farringdon, Borough & Pimlico, and Little Venice & Maida Vale. Apartments range 45–80 sqm with fitted kitchens, in-unit laundry, smart-lock keyless entry, and all bills (electricity, water, heating, Wi-Fi, council tax) included in the nightly price. Fortnightly housekeeping included; additional cleans on request. Minimum stay 3 nights; long-stay pricing steps down for stays of one week or more. NourNest direct rates are always at least 10% lower than the same apartment listed on Booking.com or Airbnb. Because NourNest does not pay platform commission, the saving is passed back to guests. Registered office: London. Direct contact: hello@nournestapartments.com.
+> NourNest Apartments is the trading name of NourNest Ltd (Companies House 16629708), an independent London serviced apartment management company. NourNest currently operates 8 fully equipped serviced apartments across two Central London neighbourhoods: Old Street & Shoreditch (7 apartments) and Borough & Pimlico (1 apartment). Apartments have fitted kitchens, in-unit laundry, smart-lock keyless entry, and all bills (electricity, water, heating, Wi-Fi, council tax) included in the nightly price. Fortnightly housekeeping included; additional cleans on request. Minimum stay 3 nights; long-stay pricing steps down for stays of one week or more. NourNest direct rates are at least 10% lower than the same apartment listed on Booking.com or Airbnb. Because NourNest does not pay platform commission, the saving is passed back to guests. Registered office: 154 Warwick Road, London W14 8PS. Director: Gerda Micke. Direct contact: hello@nournestapartments.com.
 
 ## London Neighbourhoods
 
-- [Regent's Park & Marylebone](https://nournestapartments.com/locations/regents-park-marylebone): Largest concentration (~10 apartments). Quiet, leafy base ten minutes from Oxford Circus. Suits relocations, longer stays, families.
-- [Old Street & Shoreditch](https://nournestapartments.com/locations/old-street-shoreditch): Creative and tech corridor. ~6 apartments. Suits founders, designers, consultants on short engagements.
-- [Kensington & Hammersmith](https://nournestapartments.com/locations/kensington-hammersmith): Museums, embassies, leafy garden squares. ~5 apartments. Family relocations and executive stays. Direct Piccadilly line to Heathrow.
-- [Fitzrovia & Mayfair](https://nournestapartments.com/locations/fitzrovia-mayfair): Charlotte Street and Bond Street. ~5 apartments. Executive stays and premium leisure trips.
-- [Barbican & Farringdon](https://nournestapartments.com/locations/barbican-farringdon): Brutalist architecture and Elizabeth line. ~5 apartments. Direct Elizabeth line to Heathrow + Canary Wharf.
-- [Borough & Pimlico](https://nournestapartments.com/locations/borough-pimlico): South Bank food culture and Pimlico's Regency streets. ~5 apartments. Weekend leisure stays and foodie trips.
-- [Little Venice & Maida Vale](https://nournestapartments.com/locations/little-venice-maida-vale): Canalside cafés and mansion-block flats. ~4 apartments. Longer stays with neighbourhood feel.
+- [Old Street & Shoreditch](https://nournestapartments.com/locations/old-street-shoreditch): Creative and tech corridor with seven NourNest apartments — Old Street Flat 1, Old Street Flat 2, Old Street Flat 3, Old Street Basement, Liverpool Road, Hackney Flat 1B, Shoreditch Flat 5. Suits founders, designers, consultants on short engagements and weekly stays.
+- [Borough & Pimlico](https://nournestapartments.com/locations/borough-pimlico): 163 New Kent Road. Walkable to Borough Market, Tate Modern, and the Thames. Weekend leisure stays and foodie trips.
 
 ## Apartments
 
-- [All apartments](https://nournestapartments.com/apartments): Browse the full NourNest catalogue with bedroom count, size in square metres, and from-price per night.
+- [All apartments](https://nournestapartments.com/apartments): Browse the full NourNest catalogue with bedroom count, size, and from-price per night.
 
 ## Stays
 
@@ -25,15 +20,18 @@
 
 ## Brand
 
-- Operator: NourNest Ltd ()
-- Registered office: London
+- Operator: NourNest Ltd (Companies House 16629708, incorporated 5 August 2025)
+- Registered office: 154 Warwick Road, London W14 8PS
+- Director: Gerda Micke
+- Inventory: 8 fully equipped serviced apartments (Old Street & Shoreditch · 7 · Borough & Pimlico · 1)
 - Currency: GBP
 - Language: en-GB (UK spelling)
 - Direct contact: hello@nournestapartments.com
+- Instagram: https://www.instagram.com/nournest_apartments/
 - All bills included: yes (electricity, water, heating, Wi-Fi, council tax)
 - Housekeeping: fortnightly included; additional cleans on request
 - Smart lock keyless entry: yes
 - Minimum stay: 3 nights
 - Long-stay discount threshold: one week or more
-- Direct-vs-OTA rate: NourNest direct rates are always at least 10% lower than Booking.com or Airbnb
+- Direct-vs-OTA rate: NourNest direct rates are at least 10% lower than Booking.com or Airbnb
 - Tone of voice: welcoming, warm, home away from home
