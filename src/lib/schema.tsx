@@ -13,11 +13,17 @@ const ORG_BASE = {
   url: "https://nournestapartments.com",
   telephone: "hello@nournestapartments.com",
   email: "hello@nournestapartments.com",
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "Companies House",
+    value: "16629708",
+  },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "London",
+    streetAddress: "154 Warwick Road",
     addressLocality: "London",
-    postalCode: "",
+    addressRegion: "London",
+    postalCode: "W14 8PS",
     addressCountry: "GB",
   },
   areaServed: [

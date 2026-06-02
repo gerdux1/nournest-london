@@ -13,7 +13,7 @@ export function Footer() {
               Your home away from home.
             </p>
             <p className="mt-4 text-xs text-[#555555]/80">
-              NourNest Ltd · London
+              NourNest Ltd · Company No. 16629708 · 154 Warwick Road, London W14 8PS
             </p>
           </div>
           <div>

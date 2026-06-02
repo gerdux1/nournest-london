@@ -54,11 +54,20 @@ export default function AboutPage() {
         </div>
         <div>
           <dt className="font-medium text-stone-900">Companies House</dt>
-          <dd>TBC</dd>
+          <dd>
+            <a
+              href="https://find-and-update.company-information.service.gov.uk/company/16629708"
+              className="underline underline-offset-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              16629708
+            </a>
+          </dd>
         </div>
         <div>
-          <dt className="font-medium text-stone-900">Address</dt>
-          <dd>London</dd>
+          <dt className="font-medium text-stone-900">Registered office</dt>
+          <dd>154 Warwick Road, London W14 8PS</dd>
         </div>
         <div>
           <dt className="font-medium text-stone-900">Contact</dt>
