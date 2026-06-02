@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/* NourNest brand palette per locked brand guidelines */
+@theme {
+  --font-body: var(--font-body), ui-serif, Georgia, serif;
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+  /* NourNest primary palette */
+  --color-nn-cream: #FFFBF2;
+  --color-nn-cream-50: #FFFBF2;
+  --color-nn-cream-100: #F3FADC;
+  --color-nn-cream-200: #EAECE2;
+  --color-nn-green: #385B4F;
+  --color-nn-green-light: #5a8074;
+  --color-nn-tan: #BF936A;
+  --color-nn-yellow: #FFDE59;
+  --color-nn-charcoal: #555555;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-body);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}

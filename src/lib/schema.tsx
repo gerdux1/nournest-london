@@ -1,0 +1,148 @@
+// Schema.org JSON-LD generators. Each page renders one or more of these
+// inside <script type="application/ld+json"> so AI engines + Google can cite.
+
+import type { Listing } from "./listings";
+
+const ORG_BASE = {
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  name: "NourNest",
+  legalName: "NourNest Ltd",
+  description:
+    "Serviced apartments across Central London. Fully equipped, all bills included, fortnightly housekeeping. Welcoming, warm, home away from home.",
+  url: "https://nournestapartments.com",
+  telephone: "hello@nournestapartments.com",
+  email: "hello@nournestapartments.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "London",
+    addressLocality: "London",
+    postalCode: "",
+    addressCountry: "GB",
+  },
+  areaServed: [
+    { "@type": "Place", name: "Regent's Park & Marylebone, London" },
+    { "@type": "Place", name: "Old Street & Shoreditch, London" },
+    { "@type": "Place", name: "Kensington & Hammersmith, London" },
+    { "@type": "Place", name: "Fitzrovia & Mayfair, London" },
+    { "@type": "Place", name: "Barbican & Farringdon, London" },
+    { "@type": "Place", name: "Borough & Pimlico, London" },
+    { "@type": "Place", name: "Little Venice & Maida Vale, London" },
+  ],
+  amenityFeature: [
+    "Fully fitted kitchen",
+    "Wi-Fi",
+    "Smart TV",
+    "In-unit washer-dryer",
+    "Smart lock keyless entry",
+    "All bills included",
+    "24/7 guest support",
+  ],
+};
+
+export function organizationSchema() {
+  return ORG_BASE;
+}
+
+export function listingSchema(listing: Listing) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Accommodation",
+    "@id": `https://nournestapartments.com/apartments/${listing.slug}`,
+    name: listing.title,
+    description: listing.longDescription,
+    numberOfRooms: listing.bedrooms,
+    numberOfBedrooms: listing.bedrooms,
+    numberOfBathroomsTotal: listing.bathrooms,
+    occupancy: {
+      "@type": "QuantitativeValue",
+      maxValue: listing.maxGuests,
+    },
+    floorSize: {
+      "@type": "QuantitativeValue",
+      value: listing.sizeSqm,
+      unitCode: "MTK",
+    },
+    amenityFeature: listing.amenities.map((a) => ({
+      "@type": "LocationFeatureSpecification",
+      name: a,
+      value: true,
+    })),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: listing.areaLabel,
+      addressRegion: "London",
+      postalCode: listing.postcode,
+      addressCountry: "GB",
+    },
+    ...(listing.latitude && listing.longitude
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: listing.latitude,
+            longitude: listing.longitude,
+          },
+        }
+      : {}),
+    image: listing.heroImage.startsWith("http")
+      ? listing.heroImage
+      : `https://nournestapartments.com${listing.heroImage}`,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "GBP",
+      price: listing.fromGbpPerNight,
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: listing.fromGbpPerNight,
+        priceCurrency: "GBP",
+        unitText: "night",
+        referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "DAY" },
+      },
+      availability: "https://schema.org/InStock",
+      url: `https://nournestapartments.com/apartments/${listing.slug}`,
+    },
+    brand: { "@type": "Brand", name: "NourNest" },
+  };
+}
+
+export function breadcrumb(items: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+export function faqSchema(qa: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: qa.map((x) => ({
+      "@type": "Question",
+      name: x.question,
+      acceptedAnswer: { "@type": "Answer", text: x.answer },
+    })),
+  };
+}
+
+// Render helper · drop into JSX:
+//   <Json data={listingSchema(listing)} />
+export function JsonLd({ data }: { data: object | object[] }) {
+  const json = Array.isArray(data) ? data : [data];
+  return (
+    <>
+      {json.map((d, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(d) }}
+        />
+      ))}
+    </>
+  );
+}
