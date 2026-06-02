@@ -56,10 +56,10 @@ export function Header() {
         </nav>
 
         <Link
-          href="/contact"
-          className="hidden lg:inline-flex rounded-full bg-[#385B4F] px-5 py-2 text-sm font-medium text-[#FFFBF2] hover:bg-[#5a8074] transition"
+          href="/apartments"
+          className="hidden lg:inline-flex rounded-full bg-[#FFDE59] px-6 py-2.5 text-sm font-semibold text-[#385B4F] hover:bg-[#f5d240] transition tracking-wide"
         >
-          Enquire
+          BOOK NOW
         </Link>
 
         <button
@@ -101,11 +101,11 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="/contact"
+            href="/apartments"
             onClick={() => setOpen(false)}
-            className="mt-4 inline-flex w-full justify-center rounded-full bg-[#385B4F] px-6 py-3 text-sm font-medium text-[#FFFBF2] hover:bg-[#5a8074] transition"
+            className="mt-4 inline-flex w-full justify-center rounded-full bg-[#FFDE59] px-6 py-3 text-sm font-semibold text-[#385B4F] hover:bg-[#f5d240] transition tracking-wide"
           >
-            Enquire
+            BOOK NOW
           </Link>
           <a
             href="mailto:hello@nournestapartments.com?subject=Direct%20booking%20enquiry"

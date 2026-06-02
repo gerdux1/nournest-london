@@ -6,27 +6,66 @@ import { JsonLd, breadcrumb } from "@/lib/schema";
 const OFFERINGS = [
   {
     title: "Kitchen & Dining",
-    items: ["Fully equipped kitchen", "Spacious dining areas", "Modern appliances", "Complimentary coffee and tea"],
+    body: "Fully equipped kitchen, spacious dining areas, modern appliances, complimentary coffee and tea.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M3 11h18M5 11V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6M5 11l-1 10h16l-1-10" />
+        <path d="M9 7h.01M12 7h.01M15 7h.01" />
+      </svg>
+    ),
   },
   {
     title: "Comfort & Relaxation",
-    items: ["Spacious bedrooms and bathrooms", "Washing machine and dryer", "High-quality bedding", "Blackout curtains"],
+    body: "Spacious bedrooms and bathrooms, washing machine, dryer, high-quality bedding, blackout curtains.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M3 18v-6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v6" />
+        <path d="M3 21v-3h18v3" />
+        <path d="M6 9V7a2 2 0 0 1 2-2h2v4M14 9V5h2a2 2 0 0 1 2 2v2" />
+      </svg>
+    ),
   },
   {
     title: "Convenience & Accessibility",
-    items: ["Self check-in", "Guidebook for assistance", "Luggage drop-off available", "Free parking on selected properties"],
+    body: "Free parking on premises, luggage drop-off, guidebook for assistance, self check-in.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M4 21V8l8-5 8 5v13" />
+        <path d="M9 21v-7h6v7" />
+        <path d="M2 21h20" />
+      </svg>
+    ),
   },
   {
     title: "Work Productively",
-    items: ["Dedicated workspaces", "High-speed internet", "Ample lighting"],
+    body: "Dedicated workspaces, high-speed internet, ample lighting.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="12" rx="1.5" />
+        <path d="M8 20h8M12 16v4" />
+      </svg>
+    ),
   },
   {
     title: "Entertainment & Connectivity",
-    items: ["Free Wi-Fi throughout", "Smart TV", "Streaming services", "Board games"],
+    body: "Free Wi-Fi, smart TV, streaming services, board games.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M5 13a10 10 0 0 1 14 0" />
+        <path d="M8.5 16.5a5 5 0 0 1 7 0" />
+        <circle cx="12" cy="20" r="1" />
+      </svg>
+    ),
   },
   {
     title: "Essentials",
-    items: ["Fresh towels and linens", "Shampoo, soap, conditioner", "Hairdryer", "Iron and ironing board"],
+    body: "Towels, shampoo, soap, conditioner, linens, hairdryer, iron and ironing board.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M6 3h12l-1 18H7L6 3z" />
+        <path d="M9 8h6M9 13h6" />
+      </svg>
+    ),
   },
 ];
 
@@ -41,81 +80,144 @@ const DIRECT_BENEFITS = [
   },
   {
     title: "Welcome Gift on Arrival",
-    body: "Receive a complimentary welcome gift to help you settle in and start your stay off right.",
+    body: "A complimentary welcome gift to help you settle in and start your stay off right.",
   },
 ];
+
+// Featured 3 listings as in Elaine's Canva — picks descriptive 3-bed / 2-bed / 4-bed mix
+const FEATURED_SLUGS_PRIORITY = ["abbey-road", "shepherds-bush", "westfield", "maida-vale", "marylebone"];
+const featured = (() => {
+  const picked: typeof LISTINGS = [];
+  for (const key of FEATURED_SLUGS_PRIORITY) {
+    const m = LISTINGS.find(
+      (l) => l.slug.includes(key) || l.title.toLowerCase().includes(key.replace("-", " "))
+    );
+    if (m && !picked.find((p) => p.slug === m.slug)) picked.push(m);
+    if (picked.length === 3) break;
+  }
+  while (picked.length < 3 && LISTINGS[picked.length]) picked.push(LISTINGS[picked.length]);
+  return picked;
+})();
 
 export default function Home() {
   return (
     <>
       <JsonLd data={breadcrumb([{ name: "Home", url: "https://nournestapartments.com" }])} />
 
-      {/* Hero */}
-      <section className="relative isolate min-h-[85vh] overflow-hidden bg-[#FFFBF2]">
+      {/* HERO — full-bleed London photo + white text + tan search bar (Elaine signature) */}
+      <section className="relative isolate min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=2000&q=80"
-          alt="London at sunset"
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=2400&q=85"
+          alt="London at sunset · Tower Bridge"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FFFBF2] via-[#FFFBF2]/70 to-[#FFFBF2]" />
-        <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-6 py-24 text-center">
-          <p className="font-serif text-base sm:text-lg italic text-[#BF936A] tracking-wide">
-            Your Gateway to London&rsquo;s Finest Stays
-          </p>
-          <h1 className="mt-4 font-serif text-5xl sm:text-7xl lg:text-8xl text-[#385B4F] leading-[1.05]">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/55" />
+
+        <div className="relative mx-auto flex min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] max-w-7xl flex-col justify-center px-6 py-20 lg:py-28">
+          <h1 className="font-serif text-5xl sm:text-7xl lg:text-[6rem] leading-[1.02] text-[#FFFBF2] drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]">
             NourNest Apartments
           </h1>
-          <p className="mt-8 mx-auto max-w-2xl text-lg sm:text-xl text-[#555555]">
-            Your cosy sanctuary in the heart of vibrant London. Curated serviced apartments
-            for short or medium-term stays, where every stay feels like coming home.
+          <p className="mt-5 font-serif italic text-xl sm:text-2xl lg:text-3xl text-[#FFFBF2]/95 drop-shadow-[0_2px_18px_rgba(0,0,0,0.5)]">
+            Your gateway to London&rsquo;s finest stays
           </p>
-          <div className="mt-12 flex justify-center gap-4 flex-wrap">
-            <Link
-              href="/apartments"
-              className="inline-flex items-center rounded-full bg-[#385B4F] px-8 py-3 text-sm font-medium text-[#FFFBF2] hover:bg-[#5a8074] transition"
+
+          {/* Tan search bar widget — visual signature from Elaine's design */}
+          <div className="mt-12 max-w-5xl rounded-[28px] bg-[#BF936A]/90 backdrop-blur-sm p-3 sm:p-4 shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr_auto] gap-2 sm:gap-3">
+              <div className="rounded-full bg-[#FFFBF2] px-5 py-3 flex items-center gap-2 text-sm text-[#555555]">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span className="text-[#555555]/80">Where to go?</span>
+              </div>
+              <div className="rounded-full bg-[#FFFBF2] px-5 py-3 flex items-center gap-2 text-sm text-[#555555]">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                <span className="text-[#555555]/80">Arrive</span>
+              </div>
+              <div className="rounded-full bg-[#FFFBF2] px-5 py-3 flex items-center gap-2 text-sm text-[#555555]">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                <span className="text-[#555555]/80">Depart</span>
+              </div>
+              <div className="rounded-full bg-[#FFFBF2] px-5 py-3 flex items-center gap-2 text-sm text-[#555555]">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                </svg>
+                <span className="text-[#555555]/80">Guests</span>
+              </div>
+              <Link
+                href="/apartments"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FFDE59] px-6 py-3 text-sm font-semibold text-[#385B4F] hover:bg-[#f5d240] transition"
+              >
+                <span>Search</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          <p className="mt-8 max-w-2xl text-sm sm:text-base text-[#FFFBF2]/90">
+            Curated, fully equipped serviced apartments across Central London.
+            Warm welcome, fortnightly housekeeping, all bills included.
+          </p>
+        </div>
+      </section>
+
+      {/* WELCOME — text left, arched interior photo right */}
+      <section className="bg-[#FFFBF2] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6 grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
+          <div>
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F] leading-tight">
+              Welcome to NourNest<br />Serviced Apartments
+            </h2>
+            <p className="mt-5 font-serif italic text-lg sm:text-xl text-[#BF936A]">
+              Your cosy sanctuary in the heart of vibrant London
+            </p>
+            <p className="mt-8 text-base sm:text-lg text-[#555555] leading-relaxed">
+              Whether you&rsquo;re visiting London for a short getaway or a medium-term stay, we have
+              apartments to suit every traveller, from comfortable studios to spacious family homes.
+              Our central, modern apartments come fully equipped with essential amenities, fortnightly
+              housekeeping, and a warm welcome on arrival. Every detail is taken care of, so you
+              can settle in and feel right at home.
+            </p>
+            <p className="mt-5 font-serif italic text-[#385B4F]">
+              We can&rsquo;t wait to welcome you.
+            </p>
+            <div className="mt-8">
+              <Link
+                href="/apartments"
+                className="inline-flex items-center rounded-full bg-[#FFDE59] px-7 py-3 text-sm font-semibold text-[#385B4F] hover:bg-[#f5d240] transition"
+              >
+                Book your stay
+              </Link>
+            </div>
+          </div>
+
+          {/* Arched cutout interior photo */}
+          <div className="relative">
+            <div
+              className="aspect-[4/5] overflow-hidden bg-[#EAECE2]"
+              style={{ borderRadius: "50% 50% 12px 12px / 35% 35% 6px 6px" }}
             >
-              Book your stay
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center rounded-full border border-[#385B4F] px-8 py-3 text-sm font-medium text-[#385B4F] hover:bg-[#385B4F] hover:text-[#FFFBF2] transition"
-            >
-              Enquire
-            </Link>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={featured[0]?.heroImage || LISTINGS[0]?.heroImage}
+                alt="NourNest apartment interior"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Welcome */}
-      <section className="mx-auto max-w-4xl px-6 py-24 text-center">
-        <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">
-          Welcome to NourNest Serviced Apartments
-        </h2>
-        <p className="mt-4 font-serif italic text-lg text-[#BF936A]">
-          Your cosy sanctuary in the heart of vibrant London
-        </p>
-        <p className="mt-10 text-lg text-[#555555] leading-relaxed">
-          Whether you&rsquo;re visiting London for a short getaway or a medium-term stay, we have
-          accommodations to suit every budget, from comfortable options to luxurious family homes.
-          Our spacious, modern apartments are centrally located and equipped with essential
-          amenities and top-notch security. With easy access to the best dining and shopping,
-          every moment of your stay is a delight. Enjoy fair pricing and seamless, tailored stays
-          at NourNest Apartments.
-        </p>
-        <p className="mt-6 font-serif italic text-[#385B4F]">We can&rsquo;t wait to welcome you.</p>
-        <div className="mt-10">
-          <Link
-            href="/apartments"
-            className="inline-flex rounded-full bg-[#385B4F] px-7 py-3 text-sm font-medium text-[#FFFBF2] hover:bg-[#5a8074] transition"
-          >
-            Book your stay
-          </Link>
-        </div>
-      </section>
-
-      {/* Discover Your Perfect Stay */}
-      <section className="bg-[#F3FADC] py-24">
+      {/* DISCOVER YOUR PERFECT STAY — lozenge cards (Elaine signature) */}
+      <section className="bg-[#FFFBF2] py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-14">
             <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">
@@ -125,117 +227,155 @@ export default function Home() {
               Choose your ideal serviced accommodation, and leave the details to us
             </p>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {LISTINGS.slice(0, 6).map((l) => (
+          <div className="grid gap-8 sm:gap-10 md:grid-cols-3">
+            {featured.map((l) => (
               <Link
                 key={l.slug}
                 href={`/apartments/${l.slug}`}
-                className="group rounded-2xl overflow-hidden bg-[#FFFBF2] border border-[#EAECE2] hover:shadow-xl transition"
+                className="group block"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={l.heroImage}
-                  alt={`${l.title} interior`}
-                  className="aspect-[4/3] w-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                />
-                <div className="p-6">
-                  <p className="text-xs uppercase tracking-widest text-[#BF936A]">{l.areaLabel}</p>
-                  <h3 className="mt-2 font-serif text-2xl text-[#385B4F] group-hover:underline underline-offset-4">
+                {/* Lozenge: rounded TOP corners only — Elaine card shape */}
+                <div
+                  className="aspect-[4/5] overflow-hidden bg-[#EAECE2] shadow-sm group-hover:shadow-xl transition"
+                  style={{ borderRadius: "180px 180px 18px 18px" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={l.heroImage}
+                    alt={`${l.title} interior`}
+                    className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                </div>
+                <div className="mt-5 px-2">
+                  <h3 className="font-serif text-2xl text-[#385B4F] leading-snug group-hover:underline underline-offset-4 decoration-[#BF936A]">
                     {l.title}
                   </h3>
-                  <p className="mt-2 text-sm text-[#555555]">{l.shortDescription}</p>
-                  <div className="mt-4 flex justify-between items-center text-sm text-[#555555]">
-                    <span>
-                      {l.bedrooms > 0 ? `${l.bedrooms} bed` : "Studio"} · {l.bathrooms} bath
-                      {l.sizeSqm > 0 ? ` · ${l.sizeSqm} sqm` : ""}
+                  <p className="mt-2 text-sm font-serif italic text-[#BF936A]">
+                    {l.areaLabel}, London
+                  </p>
+                  <div className="mt-3 flex items-center gap-4 text-xs text-[#555555]">
+                    <span className="inline-flex items-center gap-1">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                      </svg>
+                      {l.maxGuests} guest{l.maxGuests > 1 ? "s" : ""}
                     </span>
-                    <span className="font-medium text-[#385B4F]">Save 10% or more →</span>
+                    <span>{l.bedrooms > 0 ? `${l.bedrooms} bed` : "Studio"}</span>
+                    <span>{l.bathrooms} bath</span>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
-          <div className="mt-12 text-center">
-            <Link href="/apartments" className="text-sm font-medium text-[#385B4F] underline underline-offset-4">
-              View all apartments →
+          <div className="mt-14 text-center">
+            <Link
+              href="/apartments"
+              className="inline-flex items-center rounded-full bg-[#FFDE59] px-8 py-3 text-sm font-semibold text-[#385B4F] hover:bg-[#f5d240] transition"
+            >
+              View all apartments
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Discover London */}
-      <section className="mx-auto max-w-4xl px-6 py-24 text-center">
-        <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">
-          Discover London with NourNest Apartments
-        </h2>
-        <p className="mt-4 font-serif italic text-lg text-[#BF936A]">
-          Your perfect base in the heart of London
-        </p>
-        <p className="mt-10 text-lg text-[#555555] leading-relaxed">
-          NourNest Apartments offers a variety of locations, from bustling high-demand areas like
-          Mayfair, Kensington, and Covent Garden to serene residential neighbourhoods in Notting
-          Hill, Hampstead, and Chelsea. Enjoy easy access to London&rsquo;s top attractions, cultural
-          activities, and essential amenities. Whether you&rsquo;re visiting family, planning a getaway,
-          or seeking adventure, our properties provide the perfect base for your stay.
-        </p>
-        <div className="mt-10">
-          <Link
-            href="/locations"
-            className="inline-flex rounded-full border border-[#385B4F] px-7 py-3 text-sm font-medium text-[#385B4F] hover:bg-[#385B4F] hover:text-[#FFFBF2] transition"
-          >
-            Explore our neighbourhoods
-          </Link>
+      {/* DISCOVER LONDON — full-bleed dark green, image left, text right */}
+      <section className="bg-[#385B4F] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6 grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
+          {/* Arched cutout image left */}
+          <div className="relative order-2 lg:order-1">
+            <div
+              className="aspect-[5/4] overflow-hidden bg-[#5a8074]"
+              style={{ borderRadius: "12px 12px 50% 50% / 6px 6px 35% 35%" }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={featured[1]?.heroImage || LISTINGS[1]?.heroImage}
+                alt="London neighbourhood living"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2 text-[#FFFBF2]">
+            <h2 className="font-serif text-4xl sm:text-5xl leading-tight">
+              Discover London with<br />NourNest Apartments
+            </h2>
+            <p className="mt-5 font-serif italic text-lg sm:text-xl text-[#FFDE59]">
+              Your perfect base in the heart of London
+            </p>
+            <p className="mt-8 text-base sm:text-lg text-[#F3FADC] leading-relaxed">
+              NourNest Apartments offers a variety of locations, from bustling high-demand areas
+              like Mayfair, Kensington and Covent Garden to serene residential neighbourhoods in
+              Notting Hill, Hampstead and Chelsea. Enjoy easy access to London&rsquo;s top
+              attractions, cultural activities and essential amenities. Whether you&rsquo;re visiting
+              family, planning a getaway or seeking adventure, our properties provide the perfect
+              base for your stay.
+            </p>
+            <div className="mt-8">
+              <Link
+                href="/locations"
+                className="inline-flex items-center rounded-full bg-[#BF936A] px-8 py-3 text-sm font-semibold text-[#FFFBF2] hover:bg-[#a87d57] transition"
+              >
+                Book your unforgettable stay
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* What We Offer */}
-      <section className="bg-[#EAECE2] py-24">
+      {/* WHAT WE OFFER — 6 tiles on TAN/SAND background with line icons (Elaine signature) */}
+      <section className="bg-[#FFFBF2] py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">What we offer</h2>
             <p className="mt-4 font-serif italic text-lg text-[#BF936A]">
               Discover our premium amenities and services for a seamless stay
             </p>
           </div>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {OFFERINGS.map((o) => (
-              <div key={o.title} className="rounded-2xl bg-[#FFFBF2] p-8">
-                <h3 className="font-serif text-2xl text-[#385B4F]">{o.title}</h3>
-                <ul className="mt-5 space-y-2 text-[#555555]">
-                  {o.items.map((it) => (
-                    <li key={it} className="flex items-start gap-2">
-                      <span className="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#BF936A]" />
-                      <span>{it}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+
+          <div
+            className="bg-[#BF936A] p-8 sm:p-12 lg:p-16"
+            style={{ borderRadius: "32px 32px 120px 120px / 32px 32px 80px 80px" }}
+          >
+            <div className="grid gap-10 sm:gap-12 sm:grid-cols-2 lg:grid-cols-3">
+              {OFFERINGS.map((o) => (
+                <div key={o.title} className="text-center text-[#FFFBF2]">
+                  <div className="mx-auto inline-flex text-[#FFDE59]">{o.icon}</div>
+                  <h3 className="mt-5 font-serif text-xl sm:text-2xl text-[#FFFBF2]">{o.title}</h3>
+                  <p className="mt-3 text-sm text-[#FFFBF2]/90 leading-relaxed">{o.body}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Book Direct */}
-      <section className="bg-[#385B4F] text-[#FFFBF2] py-24">
+      {/* BOOK DIRECT */}
+      <section className="bg-[#F3FADC] py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl sm:text-5xl">Book direct</h2>
-            <p className="mt-4 font-serif italic text-lg text-[#FFDE59]">
-              Unlock exclusive benefits with NourNest Apartments
+          <div className="text-center mb-14">
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">Book direct, stay better</h2>
+            <p className="mt-4 font-serif italic text-lg text-[#BF936A]">
+              Unlock exclusive benefits when you book directly with NourNest
             </p>
           </div>
-          <div className="grid gap-10 md:grid-cols-3 text-center">
+          <div className="grid gap-8 md:grid-cols-3 text-center">
             {DIRECT_BENEFITS.map((b) => (
-              <div key={b.title}>
-                <h3 className="font-serif text-3xl text-[#FFDE59]">{b.title}</h3>
-                <p className="mt-4 text-[#F3FADC] leading-relaxed">{b.body}</p>
+              <div key={b.title} className="rounded-2xl bg-[#FFFBF2] p-8 border border-[#EAECE2]">
+                <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#FFDE59] text-[#385B4F]">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <h3 className="mt-5 font-serif text-2xl text-[#385B4F]">{b.title}</h3>
+                <p className="mt-3 text-sm text-[#555555] leading-relaxed">{b.body}</p>
               </div>
             ))}
           </div>
-          <div className="mt-14 text-center">
+          <div className="mt-12 text-center">
             <Link
               href="/contact"
-              className="inline-flex rounded-full bg-[#FFDE59] px-8 py-3 text-sm font-medium text-[#385B4F] hover:bg-[#BF936A] hover:text-[#FFFBF2] transition"
+              className="inline-flex items-center rounded-full bg-[#385B4F] px-8 py-3 text-sm font-semibold text-[#FFFBF2] hover:bg-[#5a8074] transition"
             >
               Book your stay now
             </Link>
@@ -243,64 +383,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Locations grid */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <div className="text-center mb-14">
-          <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">London neighbourhoods</h2>
-          <p className="mt-4 font-serif italic text-lg text-[#BF936A]">
-            Curated London apartments across seven neighbourhoods
-          </p>
-        </div>
-        <div className="grid gap-8 md:grid-cols-3">
-          {LOCATIONS.map((loc) => (
-            <Link
-              key={loc.slug}
-              href={`/locations/${loc.slug}`}
-              className="group relative overflow-hidden rounded-2xl h-96"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={loc.heroImage}
-                alt={loc.label}
-                className="absolute inset-0 h-full w-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#385B4F]/90 via-[#385B4F]/30 to-transparent" />
-              <div className="relative flex h-full flex-col justify-end p-7 text-[#FFFBF2]">
-                <p className="text-xs uppercase tracking-widest text-[#F3FADC]">
-                  ~{loc.propertyCountApprox} apartments
-                </p>
-                <h3 className="mt-2 font-serif text-3xl">{loc.label}</h3>
-                <p className="mt-2 text-sm text-[#F3FADC] line-clamp-3">{loc.description}</p>
-                <p className="mt-4 text-sm font-medium underline underline-offset-4">
-                  Explore {loc.shortLabel} →
-                </p>
-              </div>
-            </Link>
-          ))}
+      {/* LOCATIONS GRID */}
+      <section className="bg-[#FFFBF2] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-14">
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">London neighbourhoods</h2>
+            <p className="mt-4 font-serif italic text-lg text-[#BF936A]">
+              Curated apartments across seven beloved London areas
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {LOCATIONS.map((loc) => (
+              <Link
+                key={loc.slug}
+                href={`/locations/${loc.slug}`}
+                className="group relative overflow-hidden rounded-3xl h-80"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={loc.heroImage}
+                  alt={loc.label}
+                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#385B4F]/90 via-[#385B4F]/20 to-transparent" />
+                <div className="relative flex h-full flex-col justify-end p-6 text-[#FFFBF2]">
+                  <p className="text-xs uppercase tracking-widest text-[#F3FADC]">
+                    ~{loc.propertyCountApprox} apartments
+                  </p>
+                  <h3 className="mt-2 font-serif text-2xl">{loc.label}</h3>
+                  <p className="mt-3 text-sm font-medium underline underline-offset-4 decoration-[#FFDE59]">
+                    Explore {loc.shortLabel}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-24 text-center">
-        <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">
-          Ready to feel at home in London?
-        </h2>
-        <p className="mt-6 font-serif italic text-lg text-[#BF936A]">
-          We can&rsquo;t wait to welcome you.
-        </p>
-        <div className="mt-10 flex justify-center gap-4 flex-wrap">
-          <Link
-            href="/apartments"
-            className="inline-flex rounded-full bg-[#385B4F] px-8 py-3 text-sm font-medium text-[#FFFBF2] hover:bg-[#5a8074] transition"
-          >
-            Browse apartments
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-flex rounded-full border border-[#385B4F] px-8 py-3 text-sm font-medium text-[#385B4F] hover:bg-[#385B4F] hover:text-[#FFFBF2] transition"
-          >
-            Enquire now
-          </Link>
+      {/* FINAL CTA */}
+      <section className="relative bg-[#385B4F] py-20 sm:py-28 text-center text-[#FFFBF2]">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="font-serif text-4xl sm:text-5xl">Ready to feel at home in London?</h2>
+          <p className="mt-5 font-serif italic text-lg text-[#FFDE59]">
+            We can&rsquo;t wait to welcome you.
+          </p>
+          <div className="mt-10 flex justify-center gap-4 flex-wrap">
+            <Link
+              href="/apartments"
+              className="inline-flex items-center rounded-full bg-[#FFDE59] px-8 py-3 text-sm font-semibold text-[#385B4F] hover:bg-[#f5d240] transition"
+            >
+              Browse apartments
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center rounded-full border border-[#FFFBF2] px-8 py-3 text-sm font-semibold text-[#FFFBF2] hover:bg-[#FFFBF2] hover:text-[#385B4F] transition"
+            >
+              Enquire
+            </Link>
+          </div>
         </div>
       </section>
     </>
