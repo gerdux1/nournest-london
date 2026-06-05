@@ -58,16 +58,76 @@ export default async function ListingPage({
         <p className="text-sm uppercase tracking-widest text-stone-500">{listing.areaLabel}</p>
         <h1 className="mt-3 font-serif text-5xl sm:text-6xl text-stone-900">{listing.title}</h1>
 
-        <div className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-sm text-stone-700">
-          {listing.bedrooms > 0 ? (
-            <span>{listing.bedrooms} bedroom{listing.bedrooms > 1 ? "s" : ""}</span>
+        {/* Visual property summary chips · audit feedback */}
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm text-stone-800">
+          <div className="flex items-center gap-2 rounded-xl border border-[#385B4F]/20 bg-[#FFFBF2] px-4 py-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M3 18v-6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v6" /><path d="M3 21v-3h18v3" />
+            </svg>
+            <span>{listing.bedrooms > 0 ? `${listing.bedrooms} bedroom${listing.bedrooms > 1 ? "s" : ""}` : "Studio"}</span>
+          </div>
+          <div className="flex items-center gap-2 rounded-xl border border-[#385B4F]/20 bg-[#FFFBF2] px-4 py-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M9 6 6.5 3.5a2 2 0 0 1 2.8-2.8L11.8 3" /><path d="M3 12h18v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3z" /><path d="M7 19v2M17 19v2" />
+            </svg>
+            <span>{listing.bathrooms} bathroom{listing.bathrooms > 1 ? "s" : ""}</span>
+          </div>
+          <div className="flex items-center gap-2 rounded-xl border border-[#385B4F]/20 bg-[#FFFBF2] px-4 py-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>Sleeps {listing.maxGuests}</span>
+          </div>
+          {listing.sizeSqm > 0 ? (
+            <div className="flex items-center gap-2 rounded-xl border border-[#385B4F]/20 bg-[#FFFBF2] px-4 py-3">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2" /><path d="m9 3 6 6M3 9l6 6M15 9l6 6M9 15l6 6" />
+              </svg>
+              <span>{listing.sizeSqm} sqm</span>
+            </div>
           ) : (
-            <span>Studio</span>
+            <div className="flex items-center gap-2 rounded-xl border border-[#385B4F]/20 bg-[#FFFBF2] px-4 py-3">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="2" y="6" width="20" height="12" rx="2" /><circle cx="8" cy="12" r="1.5" /><path d="M14 9h4M14 12h4M14 15h2" />
+              </svg>
+              <span>Smart lock entry</span>
+            </div>
           )}
-          <span>{listing.bathrooms} bathroom{listing.bathrooms > 1 ? "s" : ""}</span>
-          <span>Sleeps {listing.maxGuests}</span>
-          {listing.sizeSqm > 0 && <span>{listing.sizeSqm} sqm</span>}
-          <span className="font-medium text-stone-900">Best direct rate available</span>
+        </div>
+
+        {/* Quick-scan feature row · icons for key inclusions */}
+        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-stone-600">
+          <span className="inline-flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 13a10 10 0 0 1 14 0" /><path d="M8.5 16.5a5 5 0 0 1 7 0" /><circle cx="12" cy="20" r="1" />
+            </svg>
+            Fast Wi-Fi
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M3 11h18M5 11V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6M5 11l-1 10h16l-1-10" />
+            </svg>
+            Fitted kitchen
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.5" />
+            </svg>
+            Washer-dryer
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            Smart lock
+          </span>
+          <span className="inline-flex items-center gap-1.5 font-medium text-[#385B4F]">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            All bills included
+          </span>
+          <span className="font-medium text-[#385B4F]">· Best direct rate available</span>
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}

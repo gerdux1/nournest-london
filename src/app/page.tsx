@@ -1,6 +1,40 @@
 import Link from "next/link";
 import { LISTINGS, LOCATIONS } from "@/lib/listings";
-import { JsonLd, breadcrumb } from "@/lib/schema";
+import { JsonLd, breadcrumb, faqSchema } from "@/lib/schema";
+
+// Common pre-booking questions, answered warmly. Renders as visible accordion AND FAQPage JSON-LD.
+const HOMEPAGE_FAQS = [
+  {
+    question: "How long can I stay?",
+    answer:
+      "Three nights minimum, no maximum. We host weekly stays, month-long visits, and longer relocations — long-stay pricing kicks in automatically once you cross one week.",
+  },
+  {
+    question: "What is included in the price?",
+    answer:
+      "Everything you'd expect from home: electricity, water, heating, fast Wi-Fi, council tax, fortnightly housekeeping, fresh linens and towels, a fully fitted kitchen, smart TV with streaming, and smart-lock keyless entry. No surprise charges on the way out.",
+  },
+  {
+    question: "How does check-in work?",
+    answer:
+      "Self check-in via smart lock. We send your access code by email before you arrive, so you can settle in at any hour — no front desk, no waiting around.",
+  },
+  {
+    question: "Are families and groups welcome?",
+    answer:
+      "Yes, very welcome. Our Shoreditch Flat 5 has four bedrooms and sleeps up to ten guests, perfect for families and groups. Cots and high chairs available on request when you book.",
+  },
+  {
+    question: "Why book direct instead of Booking.com or Airbnb?",
+    answer:
+      "Our direct rate is always at least 10% lower than the same apartment on Booking.com or Airbnb, because we don't pay platform commission. You also get a real person on email throughout your stay — never a platform support queue.",
+  },
+  {
+    question: "Can I extend my stay?",
+    answer:
+      "Yes, subject to availability. Just email us at any point during your stay and we'll check the calendar. Long-stay pricing applies automatically once you cross one week.",
+  },
+] as const;
 
 // "What We Offer" amenity tiles — sourced from Elaine's Canva Home draft
 const OFFERINGS = [
@@ -102,7 +136,12 @@ const featured = (() => {
 export default function Home() {
   return (
     <>
-      <JsonLd data={breadcrumb([{ name: "Home", url: "https://nournestapartments.com" }])} />
+      <JsonLd
+        data={[
+          breadcrumb([{ name: "Home", url: "https://nournestapartments.com" }]),
+          faqSchema([...HOMEPAGE_FAQS]),
+        ]}
+      />
 
       {/* HERO — full-bleed London photo + white text + tan search bar (Elaine signature) */}
       <section className="relative isolate min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] overflow-hidden">
@@ -418,6 +457,48 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Homepage FAQ — answers common pre-booking questions above the fold (audit feedback) */}
+      <section className="bg-[#FFFBF2] py-20 sm:py-28">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-4xl sm:text-5xl text-[#385B4F]">Quick answers, before you enquire</h2>
+            <p className="mt-4 font-serif italic text-lg text-[#BF936A]">
+              The questions guests ask us most often
+            </p>
+          </div>
+          <div className="divide-y divide-[#385B4F]/15 rounded-3xl border border-[#385B4F]/15 bg-[#F3FADC]/40">
+            {HOMEPAGE_FAQS.map((f, i) => (
+              <details key={i} className="group p-6 sm:p-7">
+                <summary className="flex cursor-pointer items-start justify-between gap-6 list-none">
+                  <span className="font-serif text-lg sm:text-xl text-[#385B4F]">{f.question}</span>
+                  <span
+                    className="mt-1 inline-flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#FFDE59] text-[#385B4F] transition group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                  </span>
+                </summary>
+                <p className="mt-4 text-stone-700 leading-relaxed">{f.answer}</p>
+              </details>
+            ))}
+          </div>
+          <p className="mt-8 text-center text-sm text-stone-600">
+            More on the{" "}
+            <Link href="/faq" className="font-medium text-[#385B4F] underline underline-offset-4 decoration-[#BF936A]">
+              full FAQ page
+            </Link>
+            , or{" "}
+            <Link href="/contact" className="font-medium text-[#385B4F] underline underline-offset-4 decoration-[#BF936A]">
+              email the NourNest team
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
