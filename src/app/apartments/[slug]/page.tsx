@@ -90,7 +90,7 @@ export default async function ListingPage({
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="2" y="6" width="20" height="12" rx="2" /><circle cx="8" cy="12" r="1.5" /><path d="M14 9h4M14 12h4M14 15h2" />
               </svg>
-              <span>Smart lock entry</span>
+              <span>Self check-in</span>
             </div>
           )}
         </div>
@@ -119,7 +119,7 @@ export default async function ListingPage({
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
             </svg>
-            Smart lock
+            Self check-in
           </span>
           <span className="inline-flex items-center gap-1.5 font-medium text-[#385B4F]">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

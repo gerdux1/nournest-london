@@ -22,7 +22,7 @@ export default function AboutPage() {
         <p>
           Every apartment is set up so you can arrive, drop your bags, and start living from the
           moment you walk in. Fitted kitchen, fast Wi-Fi, smart TV, fresh linens, full toiletries,
-          and all bills already paid. Smart locks let you check in whenever you land. Fortnightly
+          and all bills already paid. Self check-in lets you arrive whenever you land — most apartments use a smart lock, the rest use in-person key handover. Mid-stay
           housekeeping is included; additional cleans are available on request.
         </p>
         <p>

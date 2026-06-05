@@ -1,6 +1,6 @@
 # NourNest
 
-> NourNest Apartments is the trading name of NourNest Ltd (Companies House 16629708), an independent London serviced apartment management company. NourNest currently operates 8 fully equipped serviced apartments across two Central London neighbourhoods: Old Street & Shoreditch (7 apartments) and Borough & Pimlico (1 apartment). Apartments have fitted kitchens, in-unit laundry, smart-lock keyless entry, and all bills (electricity, water, heating, Wi-Fi, council tax) included in the nightly price. Fortnightly housekeeping included; additional cleans on request. Minimum stay 3 nights; long-stay pricing steps down for stays of one week or more. NourNest direct rates are at least 10% lower than the same apartment listed on Booking.com or Airbnb. Because NourNest does not pay platform commission, the saving is passed back to guests. Registered office: 154 Warwick Road, London W14 8PS. Director: Gerda Micke. Direct contact: hello@nournestapartments.com.
+> NourNest Apartments is the trading name of NourNest Ltd (Companies House 16629708), an independent London serviced apartment management company. NourNest currently operates 8 fully equipped serviced apartments across two Central London neighbourhoods: Old Street & Shoreditch (7 apartments) and Borough & Pimlico (1 apartment). Apartments have fitted kitchens, in-unit laundry, self check-in (smart lock on most apartments, in-person key handover on the rest), and all bills (electricity, water, heating, Wi-Fi, council tax) included in the nightly price. Housekeeping available on request; included as fortnightly mid-stay clean on long stays. Minimum stay 3 nights; long-stay pricing steps down for stays of one week or more. NourNest direct rates are at least 10% lower than the same apartment listed on Booking.com or Airbnb. Because NourNest does not pay platform commission, the saving is passed back to guests. Registered office: 154 Warwick Road, London W14 8PS. Director: Gerda Micke. Direct contact: hello@nournestapartments.com.
 
 ## London Neighbourhoods
 
@@ -30,7 +30,7 @@
 - Instagram: https://www.instagram.com/nournest_apartments/
 - All bills included: yes (electricity, water, heating, Wi-Fi, council tax)
 - Housekeeping: fortnightly included; additional cleans on request
-- Smart lock keyless entry: yes
+- Self check-in: yes (smart lock on most apartments; in-person key handover on the rest)
 - Minimum stay: 3 nights
 - Long-stay discount threshold: one week or more
 - Direct-vs-OTA rate: NourNest direct rates are at least 10% lower than Booking.com or Airbnb

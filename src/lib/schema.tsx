@@ -9,7 +9,7 @@ const ORG_BASE = {
   name: "NourNest",
   legalName: "NourNest Ltd",
   description:
-    "Serviced apartments across Central London. Fully equipped, all bills included, fortnightly housekeeping. Welcoming, warm, home away from home.",
+    "Serviced apartments across Central London. Fully equipped, all bills included. Welcoming, warm, home away from home.",
   url: "https://nournestapartments.com",
   email: "hello@nournestapartments.com",
   identifier: {
@@ -43,7 +43,7 @@ const ORG_BASE = {
     "Wi-Fi",
     "Smart TV",
     "In-unit washer-dryer",
-    "Smart lock keyless entry",
+    "Self check-in",
     "All bills included",
     "24/7 guest support",
   ],

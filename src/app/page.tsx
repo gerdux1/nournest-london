@@ -12,12 +12,12 @@ const HOMEPAGE_FAQS = [
   {
     question: "What is included in the price?",
     answer:
-      "Everything you'd expect from home: electricity, water, heating, fast Wi-Fi, council tax, fortnightly housekeeping, fresh linens and towels, a fully fitted kitchen, smart TV with streaming, and smart-lock keyless entry. No surprise charges on the way out.",
+      "Everything you'd expect from home: electricity, water, heating, fast Wi-Fi, council tax, fresh linens and towels, a fully fitted kitchen, smart TV with streaming, and self check-in (smart lock on most apartments, in-person key handover on the rest). Housekeeping on request; mid-stay clean included on long stays. No surprise charges on the way out.",
   },
   {
     question: "How does check-in work?",
     answer:
-      "Self check-in via smart lock. We send your access code by email before you arrive, so you can settle in at any hour — no front desk, no waiting around.",
+      "Self check-in. Most apartments use a smart lock — we send your access code by email before you arrive so you can settle in at any hour. A few apartments use in-person key handover at a time that works for you. Either way: no front desk, no waiting around.",
   },
   {
     question: "Are families and groups welcome?",
@@ -203,7 +203,7 @@ export default function Home() {
 
           <p className="mt-8 max-w-2xl text-sm sm:text-base text-[#FFFBF2]/90">
             Curated, fully equipped serviced apartments across Central London.
-            Warm welcome, fortnightly housekeeping, all bills included.
+            Warm welcome, housekeeping on request, all bills included.
           </p>
         </div>
       </section>

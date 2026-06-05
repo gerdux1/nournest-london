@@ -15,7 +15,7 @@ const ROWS: [string, string, string][] = [
   ["Guest support", "Named team members", "Reception desk"],
   ["Family suitability", "Excellent, multi-bedroom", "Limited"],
   ["All bills included", "Yes", "Yes"],
-  ["Self check-in", "Yes, smart lock", "Limited"],
+  ["Self check-in", "Yes — smart lock on most, key handover on the rest", "Limited"],
   ["Direct rate vs Booking.com / Airbnb", "Always 10% lower (no commission)", "Identical, plus fees"],
 ];
 
@@ -28,7 +28,7 @@ const FAQ = [
   {
     question: "What's included in the price of a NourNest apartment?",
     answer:
-      "Every NourNest booking includes electricity, water, heating, Wi-Fi, council tax, fresh linens, full toiletries, and fortnightly housekeeping. There are no surprise fees on top of the nightly rate.",
+      "Every NourNest booking includes electricity, water, heating, Wi-Fi, council tax, fresh linens, full toiletries, and housekeeping on request. Long stays get a fortnightly mid-stay clean. There are no surprise fees on top of the nightly rate.",
   },
   {
     question: "Are NourNest direct rates lower than Booking.com and Airbnb?",

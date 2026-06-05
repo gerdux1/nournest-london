@@ -16,12 +16,12 @@ const FAQ = [
   {
     question: "What's included in the price?",
     answer:
-      "Every booking includes electricity, water, heating, Wi-Fi, council tax, fresh linens, full toiletries, and fortnightly housekeeping. Additional cleans are available on request.",
+      "Every booking includes electricity, water, heating, Wi-Fi, council tax, fresh linens, full toiletries, and housekeeping on request. Mid-stay cleans are included on long stays.",
   },
   {
     question: "How does check-in work?",
     answer:
-      "Smart lock and keyless entry. You receive your access code the day before arrival and can check in any time, day or night. No need to coordinate with a reception desk.",
+      "Self check-in. Most apartments use a smart lock — you receive your access code the day before arrival and can check in any hour. The rest use in-person key handover at a time that works for you. Either way, no reception-desk wait.",
   },
   {
     question: "Are pets allowed?",
