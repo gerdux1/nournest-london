@@ -19,7 +19,7 @@ export const LOCATIONS: Location[] = [
     transport: ["Old Street (Northern)", "Liverpool Street (Central, Circle, Elizabeth, H&C, Metropolitan, National Rail)", "Shoreditch High Street (Overground)", "Hoxton (Overground)"],
     latitude: 51.5253,
     longitude: -0.0801,
-    heroImage: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1600&q=80",
+    heroImage: "/locations/old-street-shoreditch.jpg",
   },
   {
     slug: "borough-pimlico",
@@ -32,7 +32,7 @@ export const LOCATIONS: Location[] = [
     transport: ["Borough (Northern)", "London Bridge (Jubilee, Northern, National Rail)", "Pimlico (Victoria)", "Vauxhall (Victoria, National Rail)"],
     latitude: 51.497,
     longitude: -0.1057,
-    heroImage: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1600&q=80",
+    heroImage: "/locations/borough-pimlico.jpg",
   },
 ];
 
