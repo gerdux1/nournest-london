@@ -221,8 +221,8 @@ export default function Home() {
             <p className="mt-8 text-base sm:text-lg text-[#555555] leading-relaxed">
               Whether you&rsquo;re visiting London for a short getaway or a medium-term stay, we have
               apartments to suit every traveller, from comfortable studios to spacious family homes.
-              Our central, modern apartments come fully equipped with essential amenities, fortnightly
-              housekeeping, and a warm welcome on arrival. Every detail is taken care of, so you
+              Our central, modern apartments come fully equipped with essential amenities,
+              housekeeping on request, and a warm welcome on arrival. Every detail is taken care of, so you
               can settle in and feel right at home.
             </p>
             <p className="mt-5 font-serif italic text-[#385B4F]">
