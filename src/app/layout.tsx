@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, EB_Garamond } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Header } from "@/components/header";
@@ -39,6 +40,12 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,
+    other: {
+      "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION || "",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -52,6 +59,12 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <Analytics />
+        <Script
+          defer
+          data-domain="nournestapartments.com"
+          src="https://plausible.io/js/script.outbound-links.tagged-events.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
