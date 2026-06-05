@@ -11,7 +11,6 @@ const ORG_BASE = {
   description:
     "Serviced apartments across Central London. Fully equipped, all bills included, fortnightly housekeeping. Welcoming, warm, home away from home.",
   url: "https://nournestapartments.com",
-  telephone: "hello@nournestapartments.com",
   email: "hello@nournestapartments.com",
   identifier: {
     "@type": "PropertyValue",
