@@ -119,7 +119,7 @@ const DIRECT_BENEFITS = [
 ];
 
 // Featured 3 listings as in Elaine's Canva — picks descriptive 3-bed / 2-bed / 4-bed mix
-const FEATURED_SLUGS_PRIORITY = ["abbey-road", "shepherds-bush", "westfield", "maida-vale", "marylebone"];
+const FEATURED_SLUGS_PRIORITY = ["shoreditch-flat-5", "old-st-flat-1", "old-st-flat-2"];
 const featured = (() => {
   const picked: typeof LISTINGS = [];
   for (const key of FEATURED_SLUGS_PRIORITY) {
@@ -324,7 +324,7 @@ export default function Home() {
           <div className="relative order-2 lg:order-1">
             <div
               className="aspect-[5/4] overflow-hidden bg-[#5a8074]"
-              style={{ borderRadius: "12px 12px 50% 50% / 6px 6px 35% 35%" }}
+              style={{ borderRadius: "50% 50% 12px 12px / 35% 35% 6px 6px" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
