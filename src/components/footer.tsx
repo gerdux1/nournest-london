@@ -35,6 +35,7 @@ export function Footer() {
               <li><Link href="/guides" className="hover:text-[#385B4F]">London guides</Link></li>
               <li><Link href="/apartments-vs-hotels" className="hover:text-[#385B4F]">Apartments vs hotels</Link></li>
               <li><Link href="/faq" className="hover:text-[#385B4F]">FAQ</Link></li>
+              <li><Link href="/management" className="hover:text-[#385B4F]">Property management</Link></li>
             </ul>
           </div>
           <div>
