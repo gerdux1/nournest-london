@@ -1,7 +1,7 @@
 // AUTO-GENERATED from BOOM Provider API + Aria cost_floors + PriceLabs snapshot.
 // Regenerate: python3.12 scripts/regenerate-listings-from-boom.py
 
-export type AreaSlug = "regents-park-marylebone" | "old-street-shoreditch" | "kensington-hammersmith" | "fitzrovia-mayfair" | "barbican-farringdon" | "borough-pimlico" | "little-venice-maida-vale";
+export type AreaSlug = "regents-park-marylebone" | "old-street-shoreditch" | "hackney" | "islington-angel" | "kensington-hammersmith" | "fitzrovia-mayfair" | "barbican-farringdon" | "borough-pimlico" | "little-venice-maida-vale";
 
 export type Listing = { slug: string; title: string; area: AreaSlug; areaLabel: string; bedrooms: number; bathrooms: number; maxGuests: number; sizeSqm: number; fromGbpPerNight: number; shortDescription: string; longDescription: string; amenities: string[]; heroImage: string; gallery: string[]; latitude?: number; longitude?: number; postcode?: string; boomListingId?: string; bookingUrl?: string; };
 
@@ -12,7 +12,7 @@ export const LOCATIONS: Location[] = [
     slug: "old-street-shoreditch",
     label: "Old Street & Shoreditch",
     shortLabel: "Old Street & Shoreditch",
-    propertyCountApprox: 7,
+    propertyCountApprox: 5,
     description: "London's creative and tech corridor. Silicon Roundabout, Spitalfields, Brick Lane. Design-led apartments at the seam of finance and east-end street culture.",
     whyStayHere: "Walk to your meeting in the City, then bar-hop through Shoreditch the same evening. Suits founders, designers, consultants on short engagements.",
     nearbyHighlights: ["Spitalfields Market and Old Spitalfields antiques", "Brick Lane (Sunday market, curry mile, vintage)", "Boxpark Shoreditch and Box Hall", "The Curtain rooftop and Shoreditch House (members only)", "Whitechapel Gallery"],
@@ -20,6 +20,32 @@ export const LOCATIONS: Location[] = [
     latitude: 51.5253,
     longitude: -0.0801,
     heroImage: "/locations/old-street-shoreditch.jpg",
+  },
+  {
+    slug: "hackney",
+    label: "Hackney",
+    shortLabel: "Hackney",
+    propertyCountApprox: 1,
+    description: "East London's most characterful corner — Columbia Road flowers, Broadway Market, and Victoria Park. Brick terraces, independent cafés, and Sunday markets on the doorstep.",
+    whyStayHere: "Slow weekends, flower markets and canalside walks, with Liverpool Street and the City a short hop away. Suits leisure stays and longer creative visits.",
+    nearbyHighlights: ["Columbia Road Flower Market (Sundays)", "Broadway Market and London Fields", "Victoria Park", "Regent's Canal towpath", "Brick Lane and Spitalfields nearby"],
+    transport: ["Bethnal Green (Central)", "Cambridge Heath (Overground)", "Hoxton (Overground)", "Liverpool Street (Central, Circle, Elizabeth, National Rail)"],
+    latitude: 51.5276,
+    longitude: -0.069,
+    heroImage: "/locations/hackney.jpg",
+  },
+  {
+    slug: "islington-angel",
+    label: "Islington & Angel",
+    shortLabel: "Islington & Angel",
+    propertyCountApprox: 1,
+    description: "Upper Street's restaurants and theatres, the antiques of Camden Passage, and elegant Georgian squares. Polished and leafy, with Angel minutes from the City and King's Cross.",
+    whyStayHere: "Dining, theatre and antiques on the doorstep, with fast links to King's Cross and the City. Suits couples, theatre-goers, and business stays.",
+    nearbyHighlights: ["Upper Street dining and the Almeida Theatre", "Camden Passage antiques market", "Sadler's Wells", "Regent's Canal and Granary Square", "Chapel Market"],
+    transport: ["Angel (Northern)", "Highbury & Islington (Victoria, Overground)", "King's Cross St Pancras (six lines + Eurostar)", "Essex Road (Overground)"],
+    latitude: 51.5362,
+    longitude: -0.1033,
+    heroImage: "/locations/islington-angel.jpg",
   },
   {
     slug: "borough-pimlico",
@@ -61,8 +87,8 @@ export const LISTINGS: Listing[] = [
   {
     slug: "old-street-shoreditch-hackney-1b-bfb561",
     title: "Hackney Flat 1B · 1-bed",
-    area: "old-street-shoreditch",
-    areaLabel: "Old Street & Shoreditch",
+    area: "hackney",
+    areaLabel: "Hackney",
     bedrooms: 1,
     bathrooms: 1,
     maxGuests: 4,
@@ -103,8 +129,8 @@ export const LISTINGS: Listing[] = [
   {
     slug: "old-street-shoreditch-liverpool-rd-4c5f09",
     title: "Liverpool Road · 1-bed",
-    area: "old-street-shoreditch",
-    areaLabel: "Old Street & Shoreditch",
+    area: "islington-angel",
+    areaLabel: "Islington & Angel",
     bedrooms: 1,
     bathrooms: 1,
     maxGuests: 4,

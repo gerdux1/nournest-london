@@ -27,7 +27,9 @@ POSTCODE_TO_AREA = {
     "NW8": "regents-park-marylebone", "NW1": "regents-park-marylebone",
     "W1U": "regents-park-marylebone", "W1H": "regents-park-marylebone", "W1G": "regents-park-marylebone",
     "EC1V": "old-street-shoreditch", "EC1Y": "old-street-shoreditch",
-    "E1": "old-street-shoreditch", "E2": "old-street-shoreditch", "N1": "old-street-shoreditch",
+    "E1": "old-street-shoreditch",
+    "E2": "hackney", "E8": "hackney", "E5": "hackney", "E9": "hackney",
+    "N1": "islington-angel",
     "W8": "kensington-hammersmith", "W14": "kensington-hammersmith",
     "W6": "kensington-hammersmith", "W12": "kensington-hammersmith",
     "SW5": "kensington-hammersmith", "SW7": "kensington-hammersmith",
@@ -46,6 +48,8 @@ POSTCODE_TO_AREA = {
 AREA_LABEL = {
     "regents-park-marylebone": "Regent's Park & Marylebone",
     "old-street-shoreditch": "Old Street & Shoreditch",
+    "hackney": "Hackney",
+    "islington-angel": "Islington & Angel",
     "kensington-hammersmith": "Kensington & Hammersmith",
     "fitzrovia-mayfair": "Fitzrovia & Mayfair",
     "barbican-farringdon": "Barbican & Farringdon",
@@ -56,6 +60,8 @@ AREA_LABEL = {
 SHORT_DESC = {
     "regents-park-marylebone": "in a quiet street between Marylebone Village and Regent's Park.",
     "old-street-shoreditch": "minutes from Spitalfields Market, Old Street, and the City.",
+    "hackney": "steps from Columbia Road, Broadway Market, and Victoria Park.",
+    "islington-angel": "near Upper Street dining, Camden Passage, and Angel station.",
     "kensington-hammersmith": "walking distance to museums, parks, and the Piccadilly line.",
     "fitzrovia-mayfair": "steps from Bond Street, Mount Street, and the West End.",
     "barbican-farringdon": "on a Georgian square minutes from the Barbican and Farringdon.",
@@ -86,6 +92,8 @@ def map_area(listing: dict) -> str | None:
             return area
     for keywords, area in [
         (["MARYLEBONE", "REGENT", "BAKER ST", "ST JOHN", "FRAMPTON", "EUSTON"], "regents-park-marylebone"),
+        (["HACKNEY", "BETHNAL GREEN", "COLUMBIA RD", "BROADWAY MARKET", "LONDON FIELDS", "VICTORIA PARK", "DALSTON"], "hackney"),
+        (["ISLINGTON", "ANGEL", "UPPER ST", "LIVERPOOL RD", "CAMDEN PASSAGE", "BARNSBURY", "CANONBURY"], "islington-angel"),
         (["SHOREDITCH", "HOXTON", "OLD STREET", "SPITALFIELDS", "BRICK LANE", "ALDGATE"], "old-street-shoreditch"),
         (["KENSINGTON", "HAMMERSMITH", "SHEPHERD", "NOTTING HILL", "CHELSEA", "EARL"], "kensington-hammersmith"),
         (["MAYFAIR", "FITZROVIA", "SOHO", "BOND ST", "CHARLOTTE ST", "MOUNT ST"], "fitzrovia-mayfair"),
