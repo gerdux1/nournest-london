@@ -208,6 +208,7 @@ export const LISTINGS: Listing[] = [
     longitude: -0.0780659,
     postcode: "E1 6PJ",
     boomListingId: "a820acb7-3a1e-4ed7-bd60-30b9d10dbe61",
+    bookingUrl: "https://nournestapartments.bookingsboom.com/listing/26216",
   },
   {
     slug: "old-street-shoreditch-old-st-basement-620fc3",

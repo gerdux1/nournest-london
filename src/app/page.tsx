@@ -119,7 +119,10 @@ const DIRECT_BENEFITS = [
 ];
 
 // Featured 3 listings as in Elaine's Canva — picks descriptive 3-bed / 2-bed / 4-bed mix
-const FEATURED_SLUGS_PRIORITY = ["shoreditch-flat-5", "old-st-flat-1", "old-st-flat-2"];
+// Featured = strong performers that also photograph well (James 18mo net-rev ranking
+// balanced against image quality). Top-2 by revenue (Old St Basement, 163 New Kent Rd)
+// held back pending better photos. Order drives Welcome ([0]) + Discover-London ([1]) images.
+const FEATURED_SLUGS_PRIORITY = ["shoreditch-flat-5", "old-st-flat-2", "liverpool-rd"];
 const featured = (() => {
   const picked: typeof LISTINGS = [];
   for (const key of FEATURED_SLUGS_PRIORITY) {
