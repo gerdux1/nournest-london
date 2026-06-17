@@ -3,7 +3,7 @@ import { LOCATIONS } from "@/lib/listings";
 
 export function Footer() {
   return (
-    <footer className="mt-32 border-t border-[#EAECE2] bg-[#F3FADC]">
+    <footer className="border-t border-[#EAECE2] bg-[#F3FADC]">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-4">
           <div>
@@ -32,7 +32,7 @@ export function Footer() {
             <p className="text-sm font-medium text-[#385B4F]">Stays</p>
             <ul className="mt-3 space-y-2 text-sm text-[#555555]">
               <li><Link href="/apartments" className="hover:text-[#385B4F]">All apartments</Link></li>
-              <li><Link href="/corporate" className="hover:text-[#385B4F]">Corporate stays</Link></li>
+              <li><Link href="/guides" className="hover:text-[#385B4F]">London guides</Link></li>
               <li><Link href="/apartments-vs-hotels" className="hover:text-[#385B4F]">Apartments vs hotels</Link></li>
               <li><Link href="/faq" className="hover:text-[#385B4F]">FAQ</Link></li>
             </ul>

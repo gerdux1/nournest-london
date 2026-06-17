@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 const NAV = [
   { href: "/apartments", label: "Apartments" },
   { href: "/locations", label: "Locations" },
-  { href: "/corporate", label: "Corporate" },
+  { href: "/guides", label: "London Guides" },
   { href: "/apartments-vs-hotels", label: "Apartments vs Hotels" },
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
@@ -43,7 +43,7 @@ export function Header() {
           <img
             src="/brand/logo-header.png"
             alt="NourNest Apartments"
-            className="h-14 w-auto sm:h-16"
+            className="h-20 w-auto sm:h-24"
           />
         </Link>
 

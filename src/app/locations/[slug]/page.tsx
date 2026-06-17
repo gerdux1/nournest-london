@@ -56,48 +56,48 @@ export default async function LocationPage({
           alt={loc.label}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/75 via-stone-900/25 to-transparent" />
-        <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pb-14 text-white">
-          <p className="text-sm uppercase tracking-widest text-stone-200">
-            London neighbourhood · ~{loc.propertyCountApprox} apartments
+        <div className="absolute inset-0 bg-gradient-to-t from-[#385B4F]/90 via-[#385B4F]/30 to-transparent" />
+        <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pb-14 text-[#FFFBF2]">
+          <p className="text-sm uppercase tracking-widest text-[#FFDE59]">
+            London neighbourhood · ~{loc.propertyCountApprox} {loc.propertyCountApprox === 1 ? "apartment" : "apartments"}
           </p>
           <h1 className="mt-3 font-serif text-5xl sm:text-7xl leading-[1.05]">{loc.label}</h1>
-          <p className="mt-4 max-w-2xl text-stone-100 text-lg">{loc.description}</p>
+          <p className="mt-4 max-w-2xl text-[#F3FADC] text-lg">{loc.description}</p>
         </div>
       </section>
 
       {/* Why stay here */}
       <section className="mx-auto max-w-4xl px-6 py-20">
-        <h2 className="font-serif text-3xl sm:text-4xl text-stone-900">Why stay in {loc.shortLabel}</h2>
-        <p className="mt-6 text-lg text-stone-700 leading-relaxed">{loc.whyStayHere}</p>
+        <h2 className="font-serif text-3xl sm:text-4xl text-[#385B4F]">Why stay in {loc.shortLabel}</h2>
+        <p className="mt-6 text-lg text-[#555555] leading-relaxed">{loc.whyStayHere}</p>
       </section>
 
       {/* Nearby + transport */}
-      <section className="bg-stone-100 py-20">
+      <section className="bg-[#F3FADC] py-20">
         <div className="mx-auto max-w-7xl px-6 grid gap-12 lg:grid-cols-2">
           <div>
-            <p className="text-sm uppercase tracking-widest text-stone-500">Nearby</p>
-            <h2 className="mt-3 font-serif text-3xl sm:text-4xl text-stone-900">
+            <p className="text-sm uppercase tracking-widest text-[#BF936A]">Nearby</p>
+            <h2 className="mt-3 font-serif text-3xl sm:text-4xl text-[#385B4F]">
               What&rsquo;s around the corner
             </h2>
             <ul className="mt-8 space-y-4">
               {loc.nearbyHighlights.map((h) => (
-                <li key={h} className="flex items-start gap-3 text-stone-700">
-                  <span className="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-stone-900" />
+                <li key={h} className="flex items-start gap-3 text-[#555555]">
+                  <span className="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#385B4F]" />
                   <span>{h}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="text-sm uppercase tracking-widest text-stone-500">Transport</p>
-            <h2 className="mt-3 font-serif text-3xl sm:text-4xl text-stone-900">
+            <p className="text-sm uppercase tracking-widest text-[#BF936A]">Transport</p>
+            <h2 className="mt-3 font-serif text-3xl sm:text-4xl text-[#385B4F]">
               Getting around
             </h2>
             <ul className="mt-8 space-y-4">
               {loc.transport.map((t) => (
-                <li key={t} className="flex items-start gap-3 text-stone-700">
-                  <span className="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-stone-900" />
+                <li key={t} className="flex items-start gap-3 text-[#555555]">
+                  <span className="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#385B4F]" />
                   <span>{t}</span>
                 </li>
               ))}
@@ -108,13 +108,13 @@ export default async function LocationPage({
 
       {/* Apartments here */}
       <section className="mx-auto max-w-7xl px-6 py-24">
-        <h2 className="font-serif text-3xl sm:text-4xl text-stone-900">
+        <h2 className="font-serif text-3xl sm:text-4xl text-[#385B4F]">
           NourNest apartments in {loc.label}
         </h2>
         {listings.length === 0 ? (
-          <p className="mt-6 text-stone-600">
+          <p className="mt-6 text-[#555555]">
             We&rsquo;re onboarding apartments here.{" "}
-            <Link href="/contact" className="underline underline-offset-4">Enquire</Link>{" "}
+            <Link href="/contact" className="underline underline-offset-4 hover:text-[#385B4F]">Enquire</Link>{" "}
             to be notified when they launch.
           </p>
         ) : (
@@ -123,7 +123,7 @@ export default async function LocationPage({
               <Link
                 key={l.slug}
                 href={`/apartments/${l.slug}`}
-                className="group rounded-2xl overflow-hidden bg-white border border-stone-200 hover:shadow-lg transition"
+                className="group rounded-2xl overflow-hidden bg-white border border-[#EAECE2] hover:shadow-lg transition"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -132,15 +132,15 @@ export default async function LocationPage({
                   className="aspect-[4/3] w-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 />
                 <div className="p-6">
-                  <h3 className="font-serif text-2xl text-stone-900 group-hover:underline underline-offset-4">
+                  <h3 className="font-serif text-2xl text-[#385B4F] group-hover:underline underline-offset-4 decoration-[#BF936A]">
                     {l.title}
                   </h3>
-                  <p className="mt-2 text-sm text-stone-600">{l.shortDescription}</p>
-                  <div className="mt-4 flex justify-between items-center text-sm text-stone-700">
+                  <p className="mt-2 text-sm text-[#555555]">{l.shortDescription}</p>
+                  <div className="mt-4 flex justify-between items-center text-sm text-[#555555]">
                     <span>
                       {l.bedrooms > 0 ? `${l.bedrooms} bed` : "Studio"} · {l.bathrooms} bath{l.sizeSqm > 0 ? ` · ${l.sizeSqm} sqm` : ""}
                     </span>
-                    <span className="font-medium text-stone-900">Save 10% or more →</span>
+                    <span className="font-medium text-[#385B4F]">View this home &rarr;</span>
                   </div>
                 </div>
               </Link>

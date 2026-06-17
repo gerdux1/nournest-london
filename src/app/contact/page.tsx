@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <section className="mx-auto max-w-3xl px-6 py-24">
-      <p className="text-sm uppercase tracking-widest text-stone-500">Contact us</p>
+      <p className="text-sm uppercase tracking-widest text-[#BF936A]">Contact us</p>
       <h1 className="mt-3 font-serif text-5xl text-[#385B4F]">Talk to a real person.</h1>
-      <p className="mt-6 text-stone-700">
+      <p className="mt-6 text-[#555555]">
         Tell us where you want to stay and for how long. We&rsquo;ll come back with availability,
         pricing for your dates, and a warm welcome — like coming home.
       </p>
@@ -28,11 +28,11 @@ export default function ContactPage() {
 
       {/* Speak to the NourNest team · primary fast contact */}
       <div className="mt-10 rounded-2xl border border-[#385B4F]/15 bg-[#F3FADC] p-6 sm:p-8">
-        <p className="text-xs uppercase tracking-widest text-stone-500">Fastest way to reach us</p>
+        <p className="text-xs uppercase tracking-widest text-[#BF936A]">Fastest way to reach us</p>
         <h2 className="mt-2 font-serif text-2xl sm:text-3xl text-[#385B4F]">
           Email the NourNest team.
         </h2>
-        <p className="mt-3 text-stone-700">
+        <p className="mt-3 text-[#555555]">
           Send us your dates and preferred neighbourhood, and we&rsquo;ll come back with
           availability and your direct rate, usually within 15 minutes during UK hours.
           No call centres, no ticket numbers — just a real person making sure your London
@@ -51,12 +51,12 @@ export default function ContactPage() {
             Email hello@nournestapartments.com
           </a>
         </div>
-        <p className="mt-4 text-xs text-stone-500">
+        <p className="mt-4 text-xs text-[#555555]/80">
           Real human reply, usually within 15 minutes during UK hours.
         </p>
       </div>
 
-      <p className="mt-10 text-sm uppercase tracking-widest text-stone-500">Or use the form</p>
+      <p className="mt-10 text-sm uppercase tracking-widest text-[#BF936A]">Or use the form</p>
       <ContactForm />
     </section>
   );

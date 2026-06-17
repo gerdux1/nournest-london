@@ -55,11 +55,11 @@ export default async function ListingPage({
       />
 
       <article className="mx-auto max-w-5xl px-6 py-16">
-        <p className="text-sm uppercase tracking-widest text-stone-500">{listing.areaLabel}</p>
-        <h1 className="mt-3 font-serif text-5xl sm:text-6xl text-stone-900">{listing.title}</h1>
+        <p className="text-sm uppercase tracking-widest text-[#BF936A]">{listing.areaLabel}</p>
+        <h1 className="mt-3 font-serif text-5xl sm:text-6xl text-[#385B4F]">{listing.title}</h1>
 
         {/* Visual property summary chips · audit feedback */}
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm text-stone-800">
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm text-[#555555]">
           <div className="flex items-center gap-2 rounded-xl border border-[#385B4F]/20 bg-[#FFFBF2] px-4 py-3">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M3 18v-6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v6" /><path d="M3 21v-3h18v3" />
@@ -96,7 +96,7 @@ export default async function ListingPage({
         </div>
 
         {/* Quick-scan feature row · icons for key inclusions */}
-        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-stone-600">
+        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#555555]">
           <span className="inline-flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#385B4F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 13a10 10 0 0 1 14 0" /><path d="M8.5 16.5a5 5 0 0 1 7 0" /><circle cx="12" cy="20" r="1" />
@@ -153,31 +153,31 @@ export default async function ListingPage({
 
         <div className="mt-12 grid gap-12 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <h2 className="font-serif text-3xl text-stone-900">About this apartment</h2>
-            <p className="mt-5 text-stone-700 leading-relaxed">{listing.longDescription}</p>
+            <h2 className="font-serif text-3xl text-[#385B4F]">About this apartment</h2>
+            <p className="mt-5 text-[#555555] leading-relaxed">{listing.longDescription}</p>
 
-            <h2 className="mt-12 font-serif text-3xl text-stone-900">What&rsquo;s included</h2>
-            <ul className="mt-5 grid gap-3 sm:grid-cols-2 text-stone-700">
+            <h2 className="mt-12 font-serif text-3xl text-[#385B4F]">What&rsquo;s included</h2>
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2 text-[#555555]">
               {listing.amenities.map((a) => (
                 <li key={a} className="flex items-start gap-2">
-                  <span className="mt-1 text-stone-900">✓</span>
+                  <span className="mt-1 text-[#385B4F]">✓</span>
                   <span>{a}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <aside className="rounded-2xl border border-stone-200 p-6 h-fit bg-stone-50">
-            <p className="text-sm text-stone-600">Direct rate</p>
-            <p className="mt-1 font-serif text-2xl text-stone-900">
+          <aside className="rounded-2xl border border-[#EAECE2] p-6 h-fit bg-[#F3FADC]">
+            <p className="text-sm text-[#555555]">Direct rate</p>
+            <p className="mt-1 font-serif text-2xl text-[#385B4F]">
               Save 10% or more vs Booking.com &amp; Airbnb
             </p>
-            <p className="mt-3 text-sm text-stone-700">
+            <p className="mt-3 text-sm text-[#555555]">
               Our direct rate is always at least 10% lower than the same apartment on Booking.com or
               Airbnb, because we don&rsquo;t pay platform commission. Email us for your exact quote
               based on your dates and stay length.
             </p>
-            <p className="mt-2 text-xs text-stone-500">
+            <p className="mt-2 text-xs text-[#555555]/80">
               All bills included. No commission, no OTA fees.
             </p>
             {listing.bookingUrl ? (
@@ -186,17 +186,17 @@ export default async function ListingPage({
                   href={listing.bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex w-full justify-center rounded-full bg-stone-900 px-6 py-3 text-sm font-medium text-white hover:bg-stone-700 transition"
+                  className="mt-6 inline-flex w-full justify-center rounded-full bg-[#FFDE59] px-6 py-3 text-sm font-medium text-[#385B4F] hover:bg-[#f5d240] transition"
                 >
                   Check availability &amp; book →
                 </a>
                 <Link
                   href={`/contact?listing=${listing.slug}`}
-                  className="mt-3 inline-flex w-full justify-center rounded-full border border-stone-900 px-6 py-3 text-sm font-medium text-stone-900 hover:bg-stone-100 transition"
+                  className="mt-3 inline-flex w-full justify-center rounded-full border border-[#385B4F] px-6 py-3 text-sm font-medium text-[#385B4F] hover:bg-[#385B4F] hover:text-[#FFFBF2] transition"
                 >
                   Or enquire directly
                 </Link>
-                <p className="mt-3 text-xs text-stone-500 text-center">
+                <p className="mt-3 text-xs text-[#555555]/80 text-center">
                   Booking secured via Stripe. Direct rate, no OTA fees.
                 </p>
               </>
@@ -204,18 +204,18 @@ export default async function ListingPage({
               <>
                 <Link
                   href={`/contact?listing=${listing.slug}`}
-                  className="mt-6 inline-flex w-full justify-center rounded-full bg-stone-900 px-6 py-3 text-sm font-medium text-white hover:bg-stone-700 transition"
+                  className="mt-6 inline-flex w-full justify-center rounded-full bg-[#FFDE59] px-6 py-3 text-sm font-medium text-[#385B4F] hover:bg-[#f5d240] transition"
                 >
                   Enquire about this apartment
                 </Link>
-                <p className="mt-3 text-xs text-stone-500 text-center">
+                <p className="mt-3 text-xs text-[#555555]/80 text-center">
                   We&rsquo;ll come back with availability and your direct rate.
                 </p>
               </>
             )}
             <Link
               href="/apartments"
-              className="mt-4 inline-flex w-full justify-center text-sm text-stone-700 hover:text-stone-900 underline underline-offset-4"
+              className="mt-4 inline-flex w-full justify-center text-sm text-[#555555] hover:text-[#385B4F] underline underline-offset-4"
             >
               View all apartments
             </Link>

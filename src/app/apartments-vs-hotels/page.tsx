@@ -47,39 +47,39 @@ export default function ApartmentsVsHotelsPage() {
     <>
       <JsonLd data={faqSchema(FAQ)} />
       <section className="mx-auto max-w-4xl px-6 py-24">
-        <p className="text-sm uppercase tracking-widest text-stone-500">Comparison</p>
-        <h1 className="mt-3 font-serif text-5xl text-stone-900">Serviced apartments vs hotels.</h1>
-        <p className="mt-6 text-stone-700">
+        <p className="text-sm uppercase tracking-widest text-[#BF936A]">Comparison</p>
+        <h1 className="mt-3 font-serif text-5xl text-[#385B4F]">Serviced apartments vs hotels.</h1>
+        <p className="mt-6 text-[#555555]">
           A simple side-by-side on the parts that matter for week-plus stays in London.
         </p>
 
-        <div className="mt-12 overflow-x-auto rounded-2xl border border-stone-200">
+        <div className="mt-12 overflow-x-auto rounded-2xl border border-[#EAECE2]">
           <table className="w-full text-left">
-            <thead className="bg-stone-100 text-sm uppercase tracking-widest text-stone-600">
+            <thead className="bg-[#F3FADC] text-sm uppercase tracking-widest text-[#385B4F]">
               <tr>
                 <th className="py-4 px-6">Feature</th>
                 <th className="py-4 px-6">NourNest apartment</th>
                 <th className="py-4 px-6">Typical hotel</th>
               </tr>
             </thead>
-            <tbody className="text-stone-800">
+            <tbody className="text-[#555555]">
               {ROWS.map(([f, s, h]) => (
-                <tr key={f} className="border-t border-stone-200">
-                  <td className="py-4 px-6 text-stone-600">{f}</td>
-                  <td className="py-4 px-6 font-medium">{s}</td>
-                  <td className="py-4 px-6 text-stone-500">{h}</td>
+                <tr key={f} className="border-t border-[#EAECE2]">
+                  <td className="py-4 px-6 text-[#555555]">{f}</td>
+                  <td className="py-4 px-6 font-medium text-[#385B4F]">{s}</td>
+                  <td className="py-4 px-6 text-[#555555]/80">{h}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        <h2 className="mt-20 font-serif text-3xl text-stone-900">Quick questions</h2>
+        <h2 className="mt-20 font-serif text-3xl text-[#385B4F]">Quick questions</h2>
         <dl className="mt-8 space-y-8">
           {FAQ.map((q) => (
             <div key={q.question}>
-              <dt className="font-medium text-stone-900">{q.question}</dt>
-              <dd className="mt-2 text-stone-700">{q.answer}</dd>
+              <dt className="font-medium text-[#385B4F]">{q.question}</dt>
+              <dd className="mt-2 text-[#555555]">{q.answer}</dd>
             </div>
           ))}
         </dl>

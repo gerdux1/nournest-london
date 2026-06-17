@@ -34,9 +34,9 @@ const FAQ = [
       "Yes, provided the apartment is available. Just message your guest support contact and we'll roll the dates forward without penalty.",
   },
   {
-    question: "Do you accept corporate bookings on PO terms?",
+    question: "Can you arrange extras like airport transfers or a welcome hamper?",
     answer:
-      "Yes. We work with HR and mobility teams across London with monthly invoicing and consolidated statements. See the Corporate page or get in touch directly.",
+      "Yes — concierge touches are part of what we do. Airport transfers, a welcome hamper, fresh flowers, mid-stay cleans, and restaurant or theatre bookings can all be arranged. Just tell us what would make your stay special when you book.",
   },
   {
     question: "Are children welcome?",
@@ -60,14 +60,14 @@ export default function FAQPage() {
     <>
       <JsonLd data={faqSchema(FAQ)} />
       <section className="mx-auto max-w-3xl px-6 py-24">
-        <p className="text-sm uppercase tracking-widest text-stone-500">FAQ</p>
-        <h1 className="mt-3 font-serif text-5xl text-stone-900">Frequently asked questions.</h1>
+        <p className="text-sm uppercase tracking-widest text-[#BF936A]">FAQ</p>
+        <h1 className="mt-3 font-serif text-5xl text-[#385B4F]">Frequently asked questions.</h1>
 
         <dl className="mt-12 space-y-10">
           {FAQ.map((q) => (
             <div key={q.question}>
-              <dt className="font-serif text-2xl text-stone-900">{q.question}</dt>
-              <dd className="mt-3 text-stone-700 leading-relaxed">{q.answer}</dd>
+              <dt className="font-serif text-2xl text-[#385B4F]">{q.question}</dt>
+              <dd className="mt-3 text-[#555555] leading-relaxed">{q.answer}</dd>
             </div>
           ))}
         </dl>
