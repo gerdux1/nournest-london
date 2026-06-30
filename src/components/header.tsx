@@ -7,6 +7,7 @@ const NAV = [
   { href: "/apartments", label: "Apartments" },
   { href: "/locations", label: "Locations" },
   { href: "/guides", label: "London Guides" },
+  { href: "/london-planner", label: "London Planner" },
   { href: "/apartments-vs-hotels", label: "Apartments vs Hotels" },
   { href: "/management", label: "Landlords" },
   { href: "/about", label: "About" },
