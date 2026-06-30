@@ -14,9 +14,11 @@ type Body = {
   pace?: "relaxed" | "balanced" | "packed";
   email?: string;
   name?: string;
+  wantPdf?: boolean;
 };
 
 type EventItem = { name: string; date: string; venue: string; url: string | null; category: string };
+type VenueItem = { name: string; category: string; rating: number | null; detail: string; url: string | null };
 
 const WHO_LABEL: Record<string, string> = {
   couple: "couple",
@@ -277,8 +279,103 @@ async function fetchEvents(b: Body): Promise<EventItem[]> {
   }
 }
 
+// Map our interest labels to Foursquare category ids.
+const FSQ_CATEGORIES_FOR_INTEREST: Record<string, string> = {
+  "Food & drink": "13065,13032",
+  "Nightlife": "13003",
+  "Culture & museums": "10027,10056",
+  "Parks & nature": "16032",
+  "Shopping": "17000",
+};
+
+// Curated, area-aware fallback venues so "local favourites" looks alive before the key is set.
+function fallbackVenues(b: Body): VenueItem[] {
+  const listing = b.propertySlug ? LISTINGS.find((l) => l.slug === b.propertySlug) : undefined;
+  const areaSlug = listing?.area ?? b.area ?? null;
+  const byArea: Record<string, VenueItem[]> = {
+    "old-street-shoreditch": [
+      { name: "Dishoom Shoreditch", category: "Indian restaurant", rating: 4.7, detail: "7-min walk", url: null },
+      { name: "Ozone Coffee Roasters", category: "Café", rating: 4.6, detail: "5-min walk", url: null },
+      { name: "Beigel Bake, Brick Lane", category: "Bakery · 24h", rating: 4.6, detail: "9-min walk", url: null },
+      { name: "BrewDog Shoreditch", category: "Craft beer bar", rating: 4.4, detail: "6-min walk", url: null },
+    ],
+    "hackney": [
+      { name: "Pophams Bakery", category: "Bakery", rating: 4.7, detail: "8-min walk", url: null },
+      { name: "E5 Bakehouse", category: "Café · bakery", rating: 4.6, detail: "London Fields", url: null },
+      { name: "The Marksman", category: "Gastropub", rating: 4.6, detail: "Hackney Road", url: null },
+      { name: "Climpson & Sons", category: "Coffee", rating: 4.6, detail: "Broadway Market", url: null },
+    ],
+    "islington-angel": [
+      { name: "Ottolenghi Islington", category: "Restaurant · deli", rating: 4.6, detail: "Upper Street", url: null },
+      { name: "The Breakfast Club", category: "All-day brunch", rating: 4.5, detail: "6-min walk", url: null },
+      { name: "Sunday (Upper St)", category: "Brunch", rating: 4.6, detail: "Barnsbury", url: null },
+      { name: "69 Colebrooke Row", category: "Cocktail bar", rating: 4.6, detail: "8-min walk", url: null },
+    ],
+    "borough-pimlico": [
+      { name: "Padella", category: "Pasta · no-bookings", rating: 4.7, detail: "Borough Market", url: null },
+      { name: "Monmouth Coffee", category: "Coffee", rating: 4.6, detail: "Borough Market", url: null },
+      { name: "Arabica Bar & Kitchen", category: "Levantine", rating: 4.5, detail: "Borough Market", url: null },
+      { name: "El Pastór", category: "Mexican", rating: 4.6, detail: "7-min walk", url: null },
+    ],
+  };
+  const list = areaSlug && byArea[areaSlug] ? byArea[areaSlug] : [
+    { name: "Borough Market", category: "Food market", rating: 4.7, detail: "Central London", url: null },
+    { name: "Monmouth Coffee", category: "Coffee", rating: 4.6, detail: "Central London", url: null },
+  ];
+  return list.slice(0, 4);
+}
+
+// Live local venues near the base via Foursquare Places API.
+// Set FOURSQUARE_API_KEY in Vercel env to switch from the curated fallback to live data.
+async function fetchVenues(b: Body): Promise<VenueItem[]> {
+  const key = process.env.FOURSQUARE_API_KEY;
+  if (!key) return fallbackVenues(b);
+
+  const listing = b.propertySlug ? LISTINGS.find((l) => l.slug === b.propertySlug) : undefined;
+  const areaSlug = listing?.area ?? b.area ?? null;
+  const loc = LOCATIONS.find((l) => l.slug === areaSlug);
+  const lat = listing?.latitude ?? loc?.latitude;
+  const long = listing?.longitude ?? loc?.longitude;
+  if (lat == null || long == null) return fallbackVenues(b);
+
+  const cats = (b.interests ?? []).map((i) => FSQ_CATEGORIES_FOR_INTEREST[i]).filter(Boolean).join(",") || "13065,13032,10027";
+  const params = new URLSearchParams({
+    ll: `${lat},${long}`,
+    radius: "1200",
+    categories: cats,
+    sort: "RATING",
+    limit: "6",
+    fields: "name,categories,location,distance,rating,website",
+  });
+
+  try {
+    const res = await fetch(`https://api.foursquare.com/v3/places/search?${params.toString()}`, {
+      headers: { Authorization: key, accept: "application/json" },
+    });
+    if (!res.ok) return fallbackVenues(b);
+    const data = await res.json();
+    const results = data?.results ?? [];
+    const mapped: VenueItem[] = results.slice(0, 4).map((p: Record<string, unknown>) => {
+      const cat = (p.categories as { name?: string }[] | undefined)?.[0]?.name ?? "Local spot";
+      const dist = typeof p.distance === "number" ? `${Math.round(p.distance)} m away` : "Nearby";
+      const rating = typeof p.rating === "number" ? Math.round((p.rating / 2) * 10) / 10 : null; // FSQ 0-10 → /5
+      return {
+        name: String(p.name ?? "Local spot"),
+        category: cat,
+        rating,
+        detail: dist,
+        url: typeof p.website === "string" ? p.website : null,
+      };
+    });
+    return mapped.length ? mapped : fallbackVenues(b);
+  } catch {
+    return fallbackVenues(b);
+  }
+}
+
 // Push the captured lead into GoHighLevel (tag: london-planner) once
 // GHL_API_KEY / location id are added to Vercel env. Fire-and-forget.
+// This is what AUTO-ADDS every captured email to the GHL list — no human involved.
 async function captureLead(_b: Body) {
   return;
 }
@@ -295,9 +392,14 @@ export async function POST(req: Request) {
     captureLead(body).catch(() => {});
   }
 
-  const [plan, events] = await Promise.all([
+  const [plan, events, venues] = await Promise.all([
     (async () => (await claudePlan(body)) ?? templatePlan(body))(),
     fetchEvents(body),
+    fetchVenues(body),
   ]);
-  return NextResponse.json({ ...plan, events: events.map((e) => ({ ...e, dateLabel: prettyDate(e.date) })) });
+  return NextResponse.json({
+    ...plan,
+    events: events.map((e) => ({ ...e, dateLabel: prettyDate(e.date) })),
+    venues,
+  });
 }
