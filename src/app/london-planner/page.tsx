@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { LOCATIONS } from "@/lib/listings";
 import { JsonLd, breadcrumb } from "@/lib/schema";
 import { Planner } from "./Planner";
 
+// Hidden until launch: noindex + public 404. View with ?preview=1 (or in dev).
 export const metadata: Metadata = {
   title: "London Trip Planner · Build Your Personalised Itinerary",
   description:
     "Plan your perfect London stay in under a minute. Tell us who's travelling and what you love, and NourNest builds a personalised, day-by-day London itinerary — tailored to families, couples, business and group trips across Shoreditch, Hackney, Islington and Borough & Pimlico.",
   alternates: { canonical: "https://nournestapartments.com/london-planner" },
+  robots: { index: false, follow: false },
 };
 
 const FAQ = [
@@ -30,7 +33,16 @@ const FAQ = [
   },
 ];
 
-export default function LondonPlannerPage() {
+export default async function LondonPlannerPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ preview?: string }>;
+}) {
+  const { preview } = await searchParams;
+  // Public visitors get a 404 until launch; ?preview=1 (and local dev) still works.
+  if (process.env.NODE_ENV === "production" && preview !== "1") {
+    notFound();
+  }
   return (
     <>
       <JsonLd
