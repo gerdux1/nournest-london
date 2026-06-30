@@ -63,23 +63,39 @@ export default function LondonPlannerPage() {
         }}
       />
 
-      {/* Hero + intro */}
-      <section className="mx-auto max-w-7xl px-6 pt-24 pb-10">
-        <p className="text-sm uppercase tracking-widest text-[#BF936A]">London planner</p>
-        <h1 className="mt-3 max-w-3xl font-serif text-5xl sm:text-6xl text-[#385B4F]">
-          Plan your perfect London stay.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg text-[#555555] leading-relaxed">
-          Every London trip is different — a young family needs different days to a couple on a weekend
-          away or a founder in town for meetings. Tell us a little about your trip and we&rsquo;ll build a
-          personalised, day-by-day plan around the neighbourhoods we know best, then send it straight to
-          your inbox.
-        </p>
+      {/* Immersive hero */}
+      <section className="relative flex min-h-[72vh] items-end overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/locations/borough-pimlico.jpg"
+          alt="London at dusk"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#21372F]/85 via-[#21372F]/45 to-[#FFFBF2]" />
+        <div className="relative mx-auto w-full max-w-7xl px-6 pb-32 pt-28">
+          <p className="text-sm uppercase tracking-[0.3em] text-[#FFDE59]">London planner</p>
+          <h1 className="mt-4 max-w-3xl font-serif text-5xl leading-[1.05] text-white sm:text-6xl lg:text-7xl">
+            Your perfect London stay, planned in a minute.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/90">
+            Tell us who&rsquo;s travelling and what you love. We&rsquo;ll build a personalised, day-by-day
+            itinerary around the neighbourhoods we know best — with tube tips from your front door.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-2.5">
+            {["Free", "Under a minute", "🚇 Tube tips from your base", "🏠 Built around our flats"].map((t) => (
+              <span key={t} className="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* The planner */}
-      <section className="mx-auto max-w-3xl px-6 pb-16">
-        <Planner />
+      {/* The planner — floating over the hero */}
+      <section className="relative z-10 mx-auto -mt-24 max-w-3xl px-6 pb-20">
+        <div className="rounded-3xl shadow-[0_40px_90px_-30px_rgba(33,55,47,0.45)]">
+          <Planner />
+        </div>
       </section>
 
       {/* By neighbourhood — the SEO cluster */}
@@ -94,11 +110,18 @@ export default function LondonPlannerPage() {
             <Link
               key={loc.slug}
               href={`/locations/${loc.slug}`}
-              className="group block rounded-3xl border border-[#EAECE2] bg-white p-6 transition hover:shadow-lg"
+              className="group block overflow-hidden rounded-3xl border border-[#EAECE2] bg-white transition hover:shadow-xl"
             >
-              <h3 className="font-serif text-2xl text-[#385B4F] group-hover:text-[#BF936A] transition">{loc.label}</h3>
-              <p className="mt-2 text-[#555555] leading-relaxed">{loc.description}</p>
-              <span className="mt-4 inline-block text-sm font-medium text-[#BF936A]">Explore {loc.shortLabel} →</span>
+              <div className="relative h-48 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={loc.heroImage} alt={loc.label} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
+                <h3 className="absolute bottom-3 left-5 font-serif text-2xl text-white">{loc.label}</h3>
+              </div>
+              <div className="p-6">
+                <p className="text-[#555555] leading-relaxed">{loc.description}</p>
+                <span className="mt-4 inline-block text-sm font-medium text-[#BF936A]">Explore {loc.shortLabel} →</span>
+              </div>
             </Link>
           ))}
         </div>
