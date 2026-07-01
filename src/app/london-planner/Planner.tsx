@@ -141,6 +141,16 @@ export function Planner() {
   const canNextBase =
     baseMode === "ours" ? !!propertySlug : baseMode === "other" ? customArea.trim().length > 1 : !!area;
 
+  // Clickable Google Maps helpers — a search link doubles as the address; a dir link is the route.
+  const mapsSearch = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q + ", London")}`;
+  const mapsRoute = (items: string[]) => {
+    const origin = result?.mapLat != null && result?.mapLng != null ? `${result.mapLat},${result.mapLng}` : "London";
+    const pts = items.map((i) => encodeURIComponent(i + ", London"));
+    const dest = pts[pts.length - 1] || "London";
+    const way = pts.slice(0, -1).join("|");
+    return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}${way ? `&waypoints=${way}` : ""}&travelmode=transit`;
+  };
+
   return (
     <div className="np-wrap rounded-3xl border border-[#EAECE2] bg-[#FFFBF2] p-5 sm:p-8">
       <style jsx>{`
@@ -375,8 +385,8 @@ export function Planner() {
                   </div>
                   <div className="mt-4 grid gap-3 sm:grid-cols-2">
                     {result.venues.map((v, i) => (
-                      <a key={i} href={v.url ?? undefined} target={v.url ? "_blank" : undefined} rel="noopener noreferrer"
-                        className={`rounded-xl border border-[#EAECE2] px-4 py-3 transition ${v.url ? "hover:border-[#385B4F] hover:bg-[#FBFCF7]" : ""}`}>
+                      <a key={i} href={v.url ?? mapsSearch(v.name)} target="_blank" rel="noopener noreferrer"
+                        className="rounded-xl border border-[#EAECE2] px-4 py-3 transition hover:border-[#385B4F] hover:bg-[#FBFCF7]">
                         <div className="flex items-center justify-between gap-2">
                           <span className="truncate font-medium text-[#3A3A3A]">{v.name}</span>
                           {v.rating != null && <span className="shrink-0 text-xs font-semibold" style={{ color: COPPER }}>★ {v.rating}</span>}
@@ -433,11 +443,18 @@ export function Planner() {
                           <li key={idx} className="relative">
                             <span className="absolute -left-[33px] flex h-5 w-5 items-center justify-center rounded-full bg-white text-[11px] ring-1 ring-[#D9DFD2]">{slot.icon}</span>
                             <span className="block text-[11px] font-semibold uppercase tracking-wide" style={{ color: COPPER }}>{slot.label}</span>
-                            <span className="mt-0.5 block text-[#3A3A3A]">{it}</span>
+                            <a href={mapsSearch(it)} target="_blank" rel="noopener noreferrer"
+                              className="mt-0.5 inline-block text-[#3A3A3A] underline decoration-[#E6DECD] underline-offset-2 transition hover:decoration-[#385B4F]">
+                              {it}
+                            </a>
                           </li>
                         );
                       })}
                     </ol>
+                    <a href={mapsRoute(d.items)} target="_blank" rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[#EEF3EC] px-4 py-2 text-sm font-medium transition hover:bg-[#E2EADD]" style={{ color: GREEN }}>
+                      🗺️ See Day {d.day} route on Google Maps →
+                    </a>
                   </div>
                 ))}
               </div>
