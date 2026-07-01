@@ -9,6 +9,7 @@ type Body = {
   nights?: number;
   area?: string | null;
   propertySlug?: string | null;
+  customArea?: string | null;
   arrival?: string | null;
   interests?: string[];
   pace?: "relaxed" | "balanced" | "packed";
@@ -56,7 +57,8 @@ function templatePlan(b: Body) {
   const listing = b.propertySlug ? LISTINGS.find((l) => l.slug === b.propertySlug) : undefined;
   const areaSlug = listing?.area ?? b.area ?? null;
   const loc = LOCATIONS.find((l) => l.slug === areaSlug);
-  const areaLabel = loc?.shortLabel ?? "central London";
+  const custom = b.area === "custom" && b.customArea ? b.customArea.trim() : null;
+  const areaLabel = loc?.shortLabel ?? custom ?? "central London";
   const perDay = b.pace === "packed" ? 4 : b.pace === "relaxed" ? 2 : 3;
   const days = Math.min(Math.max(b.nights ?? 3, 1), 3);
 
@@ -96,6 +98,8 @@ function templatePlan(b: Body) {
   gettingAround.push("Tap in with a contactless card or phone — no need to buy tickets.");
 
   const whoLabel = WHO_LABEL[b.who ?? ""] ?? "trip";
+  const mapLat = listing?.latitude ?? loc?.latitude ?? null;
+  const mapLng = listing?.longitude ?? loc?.longitude ?? null;
   return {
     headline: `${b.size ?? 2}-person ${whoLabel} in ${areaLabel}`,
     note: WHO_NOTE[b.who ?? ""] ?? "A smart mix that keeps everyone happy.",
@@ -106,6 +110,9 @@ function templatePlan(b: Body) {
       : null,
     transport,
     gettingAround,
+    mapLat,
+    mapLng,
+    mapLabel: listing?.title ?? loc?.shortLabel ?? areaLabel,
     bookingUrl: listing?.bookingUrl ?? null,
     booked: !!listing,
   };
@@ -119,11 +126,14 @@ async function claudePlan(b: Body) {
   const listing = b.propertySlug ? LISTINGS.find((l) => l.slug === b.propertySlug) : undefined;
   const areaSlug = listing?.area ?? b.area ?? null;
   const loc = LOCATIONS.find((l) => l.slug === areaSlug);
+  const custom = b.area === "custom" && b.customArea ? b.customArea.trim() : null;
   const baseLine = listing
     ? `Guest is staying at our apartment "${listing.title}" (${listing.postcode ?? ""}) in ${loc?.label ?? "London"}.`
     : loc
       ? `Base neighbourhood: ${loc.label}.`
-      : "Base: central London (guest unsure — recommend an area).";
+      : custom
+        ? `Guest is staying in ${custom}, London (not one of our managed areas — build a great plan anchored there, and warmly note NourNest's own neighbourhoods as an option).`
+        : "Base: central London (guest unsure — recommend an area).";
   const ctx = loc
     ? `${baseLine} Why stay: ${loc.whyStayHere} Nearby: ${loc.nearbyHighlights.join("; ")}. Nearest stations/lines: ${loc.transport.join("; ")}.`
     : baseLine;
@@ -160,6 +170,9 @@ Keep it to ${days} days, ${perDay} items per day. UK spelling.`;
         ? { title: listing?.title ?? null, areaLabel: loc.shortLabel, nearestStation: transport[0] ? stationName(transport[0]) : null }
         : null,
       transport,
+      mapLat: listing?.latitude ?? loc?.latitude ?? null,
+      mapLng: listing?.longitude ?? loc?.longitude ?? null,
+      mapLabel: listing?.title ?? loc?.shortLabel ?? custom ?? "London",
       bookingUrl: listing?.bookingUrl ?? null,
       booked: !!listing,
     };

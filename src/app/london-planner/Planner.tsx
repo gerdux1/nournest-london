@@ -56,6 +56,9 @@ type PlanResult = {
   gettingAround?: string[];
   events?: EventItem[];
   venues?: VenueItem[];
+  mapLat?: number | null;
+  mapLng?: number | null;
+  mapLabel?: string | null;
   bookingUrl?: string | null;
   booked?: boolean;
 };
@@ -66,9 +69,10 @@ export function Planner() {
   const [size, setSize] = useState(2);
   const [nights, setNights] = useState(3);
   const [arrival, setArrival] = useState("");
-  const [baseMode, setBaseMode] = useState<"ours" | "area">("ours");
+  const [baseMode, setBaseMode] = useState<"ours" | "area" | "other">("ours");
   const [area, setArea] = useState<string | null>(null);
   const [propertySlug, setPropertySlug] = useState<string | null>(null);
+  const [customArea, setCustomArea] = useState("");
   const [interests, setInterests] = useState<string[]>([]);
   const [pace, setPace] = useState<Pace | null>(null);
   const [loading, setLoading] = useState(false);
@@ -77,6 +81,7 @@ export function Planner() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [emailErr, setEmailErr] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfSent, setPdfSent] = useState(false);
 
@@ -86,7 +91,7 @@ export function Planner() {
   function pickProperty(slug: string, areaSlug: string) { setPropertySlug(slug); setArea(areaSlug); }
   function pickArea(slug: string) { setArea(slug); setPropertySlug(null); }
 
-  const payload = () => ({ who, size, nights, area, propertySlug, arrival, interests, pace });
+  const payload = () => ({ who, size, nights, area, propertySlug, customArea: customArea.trim(), arrival, interests, pace });
 
   async function reveal() {
     setLoading(true);
@@ -108,6 +113,7 @@ export function Planner() {
 
   async function sendPdf() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { setEmailErr(true); return; }
+    if (!consent) return;
     setPdfLoading(true);
     try {
       await fetch("/api/plan", {
@@ -125,14 +131,15 @@ export function Planner() {
 
   function restart() {
     setStep(0); setWho(null); setSize(2); setNights(3); setArrival(""); setBaseMode("ours"); setArea(null);
-    setPropertySlug(null); setInterests([]); setPace(null); setResult(null);
-    setEmail(""); setName(""); setEmailErr(false); setPdfLoading(false); setPdfSent(false);
+    setPropertySlug(null); setCustomArea(""); setInterests([]); setPace(null); setResult(null);
+    setEmail(""); setName(""); setEmailErr(false); setConsent(false); setPdfLoading(false); setPdfSent(false);
   }
 
   const pct = Math.round((step / STEPS) * 100);
   const selectedLoc = LOCATIONS.find((l) => l.slug === (result?.areaSlug ?? area));
   const repProperty = selectedLoc ? LISTINGS.find((l) => l.area === selectedLoc.slug) : undefined;
-  const canNextBase = baseMode === "ours" ? !!propertySlug : !!area;
+  const canNextBase =
+    baseMode === "ours" ? !!propertySlug : baseMode === "other" ? customArea.trim().length > 1 : !!area;
 
   return (
     <div className="np-wrap rounded-3xl border border-[#EAECE2] bg-[#FFFBF2] p-5 sm:p-8">
@@ -227,11 +234,20 @@ export function Planner() {
           {/* WHERE */}
           {step === 3 && (
             <Step title="Where are you staying?" sub="Pick your NourNest apartment for door-to-door tube tips — or just choose an area." onBack={() => setStep(2)} onNext={() => setStep(4)} canNext={canNextBase}>
-              <div className="mb-5 inline-flex rounded-full border border-[#EAECE2] bg-white p-1">
-                <button onClick={() => setBaseMode("ours")} className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${baseMode === "ours" ? "bg-[#385B4F] text-[#FFFBF2]" : "text-[#555]"}`}>Our apartments</button>
-                <button onClick={() => setBaseMode("area")} className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${baseMode === "area" ? "bg-[#385B4F] text-[#FFFBF2]" : "text-[#555]"}`}>Just an area</button>
+              <div className="mb-5 flex flex-wrap gap-1 rounded-2xl border border-[#EAECE2] bg-white p-1 sm:inline-flex sm:rounded-full">
+                <button onClick={() => { setBaseMode("ours"); }} className={`flex-1 rounded-full px-4 py-1.5 text-sm font-medium transition sm:flex-none ${baseMode === "ours" ? "bg-[#385B4F] text-[#FFFBF2]" : "text-[#555]"}`}>Our apartments</button>
+                <button onClick={() => { setBaseMode("area"); setPropertySlug(null); }} className={`flex-1 rounded-full px-4 py-1.5 text-sm font-medium transition sm:flex-none ${baseMode === "area" ? "bg-[#385B4F] text-[#FFFBF2]" : "text-[#555]"}`}>A NourNest area</button>
+                <button onClick={() => { setBaseMode("other"); setPropertySlug(null); setArea("custom"); }} className={`flex-1 rounded-full px-4 py-1.5 text-sm font-medium transition sm:flex-none ${baseMode === "other" ? "bg-[#385B4F] text-[#FFFBF2]" : "text-[#555]"}`}>Somewhere else</button>
               </div>
-              {baseMode === "ours" ? (
+              {baseMode === "other" ? (
+                <div>
+                  <label className="mb-2 block text-sm text-[#555]">Which part of London are you staying in?</label>
+                  <input type="text" value={customArea} onChange={(e) => { setCustomArea(e.target.value); setArea("custom"); }}
+                    placeholder="e.g. Camden, Notting Hill, SW1, near King's Cross…"
+                    className="w-full rounded-xl border border-[#EAECE2] bg-white px-4 py-3 text-[#385B4F] outline-none focus:border-[#385B4F]" />
+                  <p className="mt-2 text-xs text-[#999]">Staying somewhere we don&rsquo;t manage? No problem — we&rsquo;ll still build your plan around it.</p>
+                </div>
+              ) : baseMode === "ours" ? (
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {LISTINGS.map((l) => (
                     <PhotoTile key={l.slug} img={l.heroImage} active={propertySlug === l.slug} onClick={() => pickProperty(l.slug, l.area)}
@@ -305,6 +321,22 @@ export function Planner() {
                 </>
               )}
               {result.note && <p className="mt-2 text-[#555]">{result.note}</p>}
+
+              {/* Map — pin the base */}
+              {result.mapLat != null && result.mapLng != null && (
+                <div className="mt-6 overflow-hidden rounded-2xl border border-[#EAECE2] bg-white">
+                  <iframe
+                    title="Your London base"
+                    className="h-56 w-full border-0"
+                    loading="lazy"
+                    src={`https://www.openstreetmap.org/export/embed.html?bbox=${result.mapLng - 0.013}%2C${result.mapLat - 0.006}%2C${result.mapLng + 0.013}%2C${result.mapLat + 0.006}&layer=mapnik&marker=${result.mapLat}%2C${result.mapLng}`}
+                  />
+                  <div className="flex items-center justify-between px-4 py-2.5">
+                    <span className="text-sm text-[#555]">📍 {result.mapLabel}</span>
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${result.mapLat}%2C${result.mapLng}`} target="_blank" rel="noopener noreferrer" className="text-xs font-medium" style={{ color: COPPER }}>Open in Maps →</a>
+                  </div>
+                </div>
+              )}
 
               {/* Getting around */}
               {result.base && (
@@ -426,13 +458,16 @@ export function Planner() {
                       <input type="email" placeholder="you@email.com" value={email}
                         onChange={(e) => { setEmail(e.target.value); setEmailErr(false); }}
                         className={`flex-1 rounded-xl border bg-white px-4 py-3 outline-none ${emailErr ? "border-red-400" : "border-[#EAECE2] focus:border-[#385B4F]"}`} />
-                      <button onClick={sendPdf} disabled={pdfLoading}
-                        className="rounded-full bg-[#FFDE59] px-6 py-3 font-semibold tracking-wide text-[#385B4F] transition hover:bg-[#f5d240] disabled:opacity-60">
+                      <button onClick={sendPdf} disabled={pdfLoading || !consent}
+                        className="rounded-full bg-[#FFDE59] px-6 py-3 font-semibold tracking-wide text-[#385B4F] transition hover:bg-[#f5d240] disabled:cursor-not-allowed disabled:opacity-50">
                         {pdfLoading ? "Sending…" : "EMAIL ME THE PDF"}
                       </button>
                     </div>
                     {emailErr && <p className="mt-2 text-sm text-red-500">Please enter a valid email address.</p>}
-                    <p className="mt-2 text-xs text-[#999]">No spam — just your plan and the occasional London tip. Unsubscribe anytime.</p>
+                    <label className="mt-3 flex items-start gap-2 text-xs text-[#777]">
+                      <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 accent-[#385B4F]" />
+                      <span>Email me my plan and occasional London tips. I can unsubscribe anytime. See our <Link href="/privacy" className="underline" style={{ color: GREEN }}>Privacy Policy</Link>.</span>
+                    </label>
                   </>
                 )}
               </div>
